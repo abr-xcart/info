@@ -1,0 +1,91 @@
+/* vim: set foldmethod=marker: */
+/* vim: set foldlevel=0: */
+/* vim: set ts=2 sw=2 sts=2 foldmarker={{{,}}} et: */
+/* vim: set noexpandtab tabstop=8 softtabstop=8 shiftwidth=8: */
+
+/*
+:%s/ \{8\}/\t/g
+:%s/ \{7\}/\t/g
+:%s/ \{6\}/\t/g
+:%s/ \{5\}/\t/g
+:%s/ \{4\}/\t/g
+:%s/ \{3\}/\t/g
+:%s/ \{2\}/\t/g
+*/
+
+body P {
+	font-size: 16px;
+}
+
+.TicketMsgText {
+	font-family: DejaVu, Sans-serif;
+	font-size: 16px;
+}
+
+td.center table tr.TableLine1 td, td.center table tr.TableLine2 td {
+	font-family: DejaVu, Sans-serif;
+	font-size: 14px;
+}
+
+div#top_div_c {
+	height: 1px;
+}
+
+div#top_div {
+	border: 1px solid blue;
+	bottom: 0px;
+	left: 0px;
+	width: auto;
+	padding: 4px;
+	background-color: #ff8;
+}
+div#top_div textarea {
+	height: 100px;
+}
+
+div#top_div input {
+	margin: 4px;
+	font-family: Sans-serif;
+	font-size: 14px;
+}
+
+#my_header input.my_header {
+	font-size: 14px;
+	width: 25%;
+}
+
+.zero_points {
+	background-color: #f88;
+}
+
+.non_zero_points td:first {
+	background-color: #8f8;
+}
+
+.xshops {
+}
+
+.install {
+	background-color: yellow;
+}
+
+td.lic_version {
+	font-size: 14px;
+}
+
+#range, #delta {
+	font-size: 14px;
+}
+
+select#range {
+text-overflow: ellipsis;
+}
+
+textarea#message_body {
+	font-size: 16px;
+}
+
+td#pg_tab_ticket_note.red {
+	background-color: red;
+	background-image: none;
+}

@@ -21,16 +21,16 @@ find . -type d -exec chmod g+s "{}" \;
 wget http://support.x-dev.us/support.php
 
 
-wget -O/etc/profile.d/abr.sh http://xb-gm-abr.appspot.com/abr.sh
-wget -Oxcheck.php  http://xb-gm-abr.appspot.com/xcheck/xcheck.php
-wget -Omod_install.php http://xb-gm-abr.appspot.com/mod_install/mod_install.php
-wget -Oftp.php http://xb-gm-abr.appspot.com/ftp/ftp.php
-wget -Oatar.php http://xb-gm-abr.appspot.com/atar/atar.php
+wget -O/etc/profile.d/abr.sh http://info.x-dev.us/abr.sh
+wget -Oxcheck.php  http://info.x-dev.us/xcheck/xcheck.php
+wget -Omod_install.php http://info.x-dev.us/mod_install/mod_install.php
+wget -Oftp.php http://info.x-dev.us/ftp/ftp.php
+wget -Oatar.php http://info.x-dev.us/atar/atar.php
 
 wget http://www.day32.com/MySQL/tuning-primer.sh
 wget https://raw.githubusercontent.com/rackerhacker/MySQLTuner-perl/master/mysqltuner.pl
 
-mkdir ~/.ssh 2>&1 && wget -O ~/.ssh/authorized_keys ~/.ssh/authorized_keys http://xb-gm-abr.appspot.com/authorized_keys 2>&1 && chmod -R go-rwx ~/.ssh
+mkdir ~/.ssh 2>&1 && wget -O ~/.ssh/authorized_keys ~/.ssh/authorized_keys http://info.x-dev.us/authorized_keys 2>&1 && chmod -R go-rwx ~/.ssh
 
 </pre>
 <h1>Patches</h1>
@@ -96,7 +96,7 @@ Just run cvs update -A on these files to revert your working copy to the head re
 
 <h1>GIT</h1>
 <pre>
-wget http://xb-gm-abr.appspot.com/git/.gitignore
+wget http://info.x-dev.us/git/.gitignore
 
 git config --global user.name "Yuriy Abramov"
 git config --global user.email `whoami`@`hostname`

@@ -1,0 +1,114 @@
+LI,body {
+        PADDING: 0px;
+}
+
+DIV.bluebox {
+}
+DIV.box {
+        border: black solid 0px;
+        FONT-SIZE: 18px;
+        MARGIN-BOTTOM: 36px;
+        PADDING: 0px;
+        WIDTH: 100%;
+}
+LI {
+        TEXT-ALIGN: left;
+}
+UL,BODY,HR,P {
+        MARGIN: 0px;
+}
+LI {
+        border: red solid 0px;
+}
+TH,TD {
+        PADDING-LEFT: 24px;
+}
+P,UL {
+        PADDING: 12px;
+        PADDING-LEFT: 24px;
+}
+A {
+        TEXT-DECORATION: none;
+}
+TH {
+        border-BOTTOM: blue solid 1px;
+}
+TABLE {
+        MARGIN: 0px;
+}
+DIV.bluebox {
+        MARGIN: 0px;
+        PADDING: 0px;
+        MARGIN-TOP: 12px;
+        border-TOP: blue solid 1px;
+        border-BOTTOM: blue solid 1px;
+        BACKGROUND-COLOR: #DDF;
+}
+H2 {
+        TEXT-ALIGN: CENTER;
+        border-TOP: green solid 1px;
+        border-BOTTOM: green solid 1px;
+        BACKGROUND-COLOR: #DFD;
+        COLOR: green;
+        FONT-SIZE: 18px;
+        MARGIN: 0px;
+        MARGIN-BOTTOM: 0px;
+        WIDTH: 100%;
+}
+.A {
+        BACKGROUND-COLOR:       #DDDDDD;
+}
+.B {
+        BACKGROUND-COLOR:       #EEEEEE;
+}
+TH {
+        BACKGROUND-COLOR:       #DDF;
+        TEXT-ALIGN: left;
+        COLOR: blue;
+}
+HR {
+        MARGIN-TOP: 8px;
+        BACKGROUND-COLOR:       #DDDDFF;
+        BORDER: 0px;
+        BORDER-TOP: blue solid 1px;
+
+}
+DIV {
+        COLOR: BLUE;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+span.ok, span.fail, span.blue, span.warn {
+    font-weight: bold;
+}
+span.ok {
+    color: green;
+}
+span.fail {
+    color: red;
+}
+span.blue {
+    color: blue;
+}
+span.warn {
+    color: #BB1;
+}
+
+span.prefix {
+    text-decoration: italic;
+    color: #00F;
+}
+th.c1 {
+    width: 360px;
+}
+th.c2 {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+th.c3 {
+    width: 60px;
+}
+

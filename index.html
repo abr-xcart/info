@@ -123,5 +123,16 @@ mkdir -p $HOME/.vim/plugin
 export GPG_TTY=`tty`
 wget -O $HOME/.vim/plugin/gnupg.vim "http://www.vim.org/scripts/download_script.php?src_id=12200"
 </pre>
+
+https://support.cloudflare.com/hc/en-us/articles/200169166-How-do-I-whitelist-CloudFlare-s-IP-addresses-in-iptables-
+
+service iptables-persistent save
+aptitude install ipset iptables-persistent
+export SET=qtm
+ipset create $SET hash:net
+for x in $(curl http://info.x-dev.us/qtmsoft-ips.txt); do ipset add $SET $x; done
+iptables -A INPUT -m set --match-set $SET src -p tcp -m multiport --dports 1022 -j ACCEPT
+service iptables-persistent save
+
 </body>
 </html>

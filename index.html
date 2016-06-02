@@ -105,13 +105,15 @@ git config --global color.status always
 git config --global color.diff always
 git config --global diff.tool vimdiff
 git config --global difftool.prompt false
+git config --global difftool.vimdiff.cmd 'vim -f -d -c "wincmd l" -c '\''cd "$GIT_PREFIX"'\'' "$LOCAL" "$REMOTE"'
+git config --global mergetool.prompt false
+git config --global merge.tool vimdiff
 git config --global alias.d difftool
 git config --global alias.co checkout
 git config --global alias.ci commit
 git config --global alias.b branch
 git config --global alias.m mergetool
 git config --global core.pager 'less -R'
-git config --global difftool.vimdiff.cmd 'vim -f -d -c "wincmd l" -c '\''cd "$GIT_PREFIX"'\'' "$LOCAL" "$REMOTE"'
 </pre>
 <pre>
 visudo

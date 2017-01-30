@@ -7,6 +7,8 @@ Thumbs.db
 *.gif
 *.png
 *.PNG
+*.TIF
+*.tif
 *.ico
 *.pdf
 *.sql
@@ -25,6 +27,7 @@ Thumbs.db
 *.diff
 
 # X-Cart temporary files
+catalog*/*.html
 /var/cache*
 /var/upgrade*
 /var/templates_c*

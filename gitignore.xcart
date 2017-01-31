@@ -58,3 +58,10 @@ _vti_cnf
 _vti_log
 _vti_pvt
 _vti_txt
+
+/images/Z/*/description.xml
+/images/Z/*/.listing
+/upgrade
+!/upgrade/.htaccess
+
+/vendor

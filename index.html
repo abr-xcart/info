@@ -78,6 +78,9 @@ export LESS='-R'
 export EXCLUDES=$(for e in so bin exe dll cur cpp pl orig lst ico jpeg JPG jpg png tif gif iso flv wmv swf MPG mpg mp3 zip tar rar gz tgz bz2 pdf sql; do echo -n " --exclude=\*.$e "; done)
 alias grep="grep --color=auto $EXCLUDES"
 printf ":g/qt_debug/d\n:x\n" | ex FILE
+
+# === grep XCart PHP files ===
+pcregrep -l --color -r --exclude_dir='(?:log|upgrade|cache|tmp|templates_c)' --include='\.php$' <PATTERN> <PATH>
 </pre>
 
 <h1>CVS</h1>

@@ -1,3 +1,6 @@
+# git add .gitignore
+# git add *.php modules/ include/ payment/ mail/ admin provider/ customer/ partner/ shipping/ sql/ var/ catalog/ images/ robots*.txt *.html .htaccess
+
 Thumbs.db
 .ftpquota
 *.png

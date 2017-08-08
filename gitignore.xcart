@@ -28,6 +28,9 @@ Thumbs.db
 *.dll
 *.e
 *.diff
+*.ttf
+*.mp4
+*.wmv
 
 # X-Cart temporary files
 catalog*/*.html

@@ -68,3 +68,14 @@ _vti_txt
 !/upgrade/.htaccess
 
 /vendor
+
+/sitemap.xml
+
+/.bash_history
+/.cache
+/.lesshst
+/.mysql_history
+/.ssh
+/.viminfo
+
+.DS_Store

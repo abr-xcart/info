@@ -29,11 +29,16 @@ Thumbs.db
 *.e
 *.diff
 *.ttf
+*.xml
 *.mp4
 *.wmv
+*.psd
+*.pm
 
 # X-Cart temporary files
 catalog*/*.html
+/files
+!/files/.htaccess
 /var/cache*
 /var/upgrade*
 /var/templates_c*

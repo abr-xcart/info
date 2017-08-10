@@ -1,6 +1,6 @@
 # git add .gitignore
 # git add *.php modules/ include/ payment/ mail/ admin provider/ customer/ partner/ shipping/ sql/ var/ catalog/ images/ robots*.txt *.html .htaccess
-# git add CHANGELOG COPYRIGHT NEW-4.4.0 README VERSION
+# git add CHANGELOG COPYRIGHT NEW-* README VERSION CHANGELOG* COPYRIGHT INSTALL.* VERSION.*
 Thumbs.db
 .ftpquota
 *.png

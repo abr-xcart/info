@@ -6,6 +6,7 @@ Thumbs.db
 *.png
 *.jpg
 *.jpeg
+*.pjpeg
 *.JPG
 *.gif
 *.png
@@ -34,6 +35,7 @@ Thumbs.db
 *.wmv
 *.psd
 *.pm
+*.bmp
 
 # X-Cart temporary files
 catalog*/*.html

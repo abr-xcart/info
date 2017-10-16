@@ -1,0 +1,37 @@
+# vim: ts=2 sts=2 et paste:
+
+host: backup-redu.x-shops.com
+duplicity:
+  path:
+    local: /usr/bin/duplicity
+provider: "ovh"
+identity_file: /root/.ssh/id_rsa_backup
+tmp:
+  path: tmp
+  mode: 0700
+ttl: 1M
+mysql:
+  target: remote
+  path: backup/newmysql
+  mode: 0700
+full_period: 10D
+full_period_int: 14
+status_file: /tmp/mysqlbackupStatus
+full:                                                                                                                                                                       
+  path: backup/newmysql/full                                                                                                                                                
+  mode: 0700
+  status_file: backup/newmysql/last_full_backup.txt
+inc:
+  path: backup/newmysql/inc
+  mode: 0700
+backup_stats_file: /tmp/backupstats
+disk_mysqldump: false
+exclude:
+    - '/var/run/'
+    - '^/home/clamav'
+    - '^/home/\.cpan'
+    - '^/home/cPanelInstall'
+    - '^/home/\.cpcpan'
+    - '^/home/virtfs'
+    - '/\.git/'
+#    - '\.(?:tgz|mp4|tar\.gz|zip)$'

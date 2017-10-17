@@ -1,0 +1,12 @@
+<?php
+if (
+    !preg_match('/^79\.132\.99\.\d+/', $_SERVER['REMOTE_ADDR'])
+    && !in_array($_SERVER['REMOTE_ADDR'], ['109.195.205.16'])
+) {
+    header("HTTP/1.0 404 Not Found");
+    echo ($_SERVER['REMOTE_ADDR']);
+    die;
+}
+phpinfo();
+
+

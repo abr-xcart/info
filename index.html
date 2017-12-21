@@ -100,6 +100,12 @@ Just run cvs update -A on these files to revert your working copy to the head re
 <pre>
 wget -O.gitignore http://info.x-dev.us/gitignore.xcart
 
+# Setup Server Env Vars
+export GIT_AUTHOR_NAME="Yuriy Abramov"
+export GIT_AUTHOR_EMAIL="abr@x-cart.com"
+echo "AcceptEnv GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL" >> /etc/ssh/sshd_config
+service sshd reload
+
 # General Git config
 git config --global user.name "X-Cart Hosting Admin"
 git config --global user.email `whoami`@`hostname`

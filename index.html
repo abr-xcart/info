@@ -69,16 +69,18 @@ SELECT value FROM xcart_config WHERE name = "shop_closed";
 </pre>
 <h1>GREP</h1>
 <pre>
-# colorize
-alias grep='grep --color=auto'
-
 sudo update-alternatives --config editor
 
+cat <<EOL >> /etc/bashrc
 export EDITOR=`which vim`
 export VISUAL=$EDITOR
 export LS_OPTIONS='--color=auto'
-# Colours in less
-export LESS='-R'
+export LESS='-Rr'
+alias grep="grep --color=auto"
+alias vi=$EDITOR
+
+EOL
+
 
 export EXCLUDES=$(for e in so bin exe dll cur cpp pl orig lst ico jpeg JPG jpg png tif gif iso flv wmv swf MPG mpg mp3 zip tar rar gz tgz bz2 pdf sql; do echo -n " --exclude=\*.$e "; done)
 alias grep="grep --color=auto $EXCLUDES"

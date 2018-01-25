@@ -73,11 +73,11 @@ sudo update-alternatives --config editor
 
 cat &lt;&lt; EOL &gt;&gt; /etc/bashrc
 export EDITOR=`which vim`
-export VISUAL=$EDITOR
+export VISUAL=\$EDITOR
 export LS_OPTIONS='--color=auto'
 export LESS='-Rr'
 alias grep="grep --color=auto"
-alias vi=$EDITOR
+alias vi=\$EDITOR
 
 EOL
 

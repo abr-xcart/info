@@ -14,7 +14,7 @@ cd /etc/zabbix || ( echo NO /etc/zabbix ; exit -1 )
 
 FILE="/tmp/$$.$RANDOM"
 cat << XYZ >$FILE
-Server=zabbix.z-hz.x-shops.com,localhost,boat.z-hv.x-shops.com,avia.z-hv.x-shops.com
+Server=localhost,zabbix.z-hz.x-shops.com,aviabak.z-hz.x-shops.com,boat.z-hv.x-shops.com,avia.z-hv.x-shops.com,collect.z-lw.x-shops.com,giti.z-lw.x-shops.com
 #ServerActive=boat.z-hv.x-shops.com
 #ServerActive=avia.z-hv.x-shops.com
 ServerActive=zabbix.x-shops.com

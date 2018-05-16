@@ -9,3 +9,4 @@ cd /opt/cdev/backup
 git clone git@bitbucket.org:kas_p/backup.git
 cd /opt/cdev/backup/backup
 git checkout DEDIC
+/opt/cdev/backup/backup/setup.sh

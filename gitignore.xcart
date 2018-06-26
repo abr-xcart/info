@@ -93,3 +93,5 @@ _vti_txt
 
 /images/img/*.jpg
 /images/img/*.gif
+
+/.well-known

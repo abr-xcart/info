@@ -1,9 +1,14 @@
 #!/bin/sh
 
-yum upgrade -y python-requests
+yum install -y python-requests python-urllib3 python-six
+
+pip install --upgrade 
 pip install --upgrade pip
 pip install --upgrade setuptools
-pip install urllib3 --force --upgrade
+pip install urllib3 requests
+pip install requests
+
+pip uninstall -y urllib3 requests
 pip install pyxchl
 cd /opt/cdev/backup
 if [ ! -d /opt/cdev/backup/backup ]; then

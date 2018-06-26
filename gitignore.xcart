@@ -89,3 +89,7 @@ _vti_txt
 /.viminfo
 
 .DS_Store
+/.user.ini
+
+/images/img/*.jpg
+/images/img/*.gif

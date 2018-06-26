@@ -114,8 +114,7 @@ git ci -m INIT --allow-empty
 wget -O.gitignore http://info.x-dev.us/gitignore.xcart
 
 # system settings
-git add robots.txt .user.ini
-git add .gitignore
+git add robots.txt .user.ini php.ini .gitignore
 git ci -m "system settings"
 
 # xcart
@@ -125,6 +124,25 @@ git add C* V* R*
 git add skin
 git add INSTALL* N*
 git ci -m "default xcart"
+
+# custom
+git add skin/common_files/pages/en/*.html
+git ci -m "static pages"
+
+git add include/templater/plugins/*.php
+git ci -m "smarty plugins"
+
+# cleanup
+find . -name "*~" -print0 | xargs --no-run-if-empty -n 1 -0 git add
+find . -name "*.orig" -print0 | xargs --no-run-if-empty -n 1 -0 git add
+find . -name "*.ori" -print0 | xargs --no-run-if-empty -n 1 -0 git add
+find . -name "*OLD" -print0 | xargs --no-run-if-empty -n 1 -0 git add
+find . -name "*.bak" -print0 | xargs --no-run-if-empty -n 1 -0 git add
+
+git ci -m garbage
+git revert HEAD
+
+
 
 </pre>
 <a href="https://docs.google.com/document/d/1kiHvoNl7G-O4VxjGpV2egTAb8_VQXV-q1mARJLEsFco/edit#">https://docs.google.com/document/d/1kiHvoNl7G-O4VxjGpV2egTAb8_VQXV-q1mARJLEsFco/edit#</a>

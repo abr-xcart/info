@@ -203,5 +203,15 @@ for x in $(curl http://info.x-dev.us/qtmsoft-ips.txt); do ipset add $SET $x; don
 iptables -A INPUT -m set --match-set $SET src -p tcp -m multiport --dports 1022 -j ACCEPT
 service iptables-persistent save
 
+<h1>personal demo</h1>
+<pre>
+
+начиная с  5.3.3.3 процедура удаления  модуля  Trial  следующая
+- в etc/config.php в секцию [performance] добавить ignore_system_modules = On
+- сделать ребилд кеша в магазине
+- на странице My addons найти модуль Trial и удалить его
+</pre>
+
+
 </body>
 </html>

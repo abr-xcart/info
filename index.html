@@ -217,6 +217,12 @@ service iptables-persistent save
 
 find  /var/cpanel/userdata -name "*.php-fpm.yaml"
 
+/usr/local/cpanel/scripts/install_lets_encrypt_autossl_provider
+
+DKIM
+/usr/local/cpanel/bin/dkim_keys_install system
+/var/cpanel/domain_keys/public
+
 
 </pre>
 

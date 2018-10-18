@@ -226,6 +226,47 @@ DKIM
 
 </pre>
 
+<h1>CSD</h1>
+<pre>
+
+{
+    "csd": {
+        "dns_sync": {
+            "enabled": "0"
+        }
+    },
+    "ansible": {
+        "redis": {
+            "enabled": "1"
+        },
+        "timezone": {
+            "timezone": "Asia/Kolkata"
+        },
+        "mariadb": {
+            "custom_options": {
+                "query_cache_size": "16777216",
+                "query_cache_type": "1"
+            }
+        },
+        "memcached": {
+            "enabled": "0"
+        },
+        "php": {
+            "disable_xdebug": "1",
+            "domains": {
+                "farmer.live": {
+                    "7.2": {
+                        "request_slowlog_timeout": "1s",
+                        "slowlog": "/var/www/vhosts/farmer.live/php.slow.log"
+                    }
+                }
+            },
+            "disable_open_basedir": "1",
+            "disable_ioncube": "1"
+        }
+    }
+}
+</pre>
 
 </body>
 </html>

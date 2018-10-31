@@ -6,11 +6,18 @@
 http://www.host.com:2086/scripts/command?PFILE=Service_Configuration
 Service Configuration -> Apache Configuration -> Include Editor -> Pre VirtualHost Include -> All Versions -> pre_virtualhost_global.conf
 
+<h1>Support.php</h1>
 <pre>
+wget http://support.x-dev.us/support.php
+wget https://www.dropbox.com/s/oqkkv9vuwpjgs2t/support.php
+</pre>
+
 <h1>Zabbix</h1>
+<pre>
 wget -O ~/za.sh -q http://info.x-dev.us/za.sh && sh ~/za.sh
 wget -O ~/zp.sh -q http://info.x-dev.us/zp.sh && sh ~/zp.sh
 </pre>
+
 <pre>
 dir="var log files catalog templates_c .pgp skin* images"
 find $dir -exec chmod a+w "{}" \;
@@ -19,7 +26,6 @@ cd .git
 chmod -R ug+rw,o-rwx .
 find . -type d -exec chmod g+s "{}" \;
 
-wget http://support.x-dev.us/support.php
 
 
 wget -Ophpinfo.php http://info.x-dev.us/phpinfo
@@ -273,7 +279,6 @@ DKIM
 }
 </pre>
 <pre>
-wget https://www.dropbox.com/s/oqkkv9vuwpjgs2t/support.php
 </pre>
 </body>
 </html>

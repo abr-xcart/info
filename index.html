@@ -278,7 +278,10 @@ DKIM
     }
 }
 </pre>
+
+<h1>SQL DB</h1>
 <pre>
+mysql -BN -e "SHOW DATABASES" | grep -v mysql |grep -v _schema$ | xargs -n1 -I % bash -c 'echo -n "% - "; mysql -BN -e "SHOW TABLES" % | wc -l '
 </pre>
 </body>
 </html>

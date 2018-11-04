@@ -269,7 +269,8 @@ DKIM
                     "7.2": {
                         "request_terminate_timeout": 120,
                         "request_slowlog_timeout": "1s",
-                        "slowlog": "/var/www/vhosts/farmer.live/php.slow.log"
+                        "slowlog": "/var/www/vhosts/farmer.live/php.slow.log",
+			"php_value[sendmail_path]": "/usr/sbin/sendmail -t -i -f info@littlediode.com"
                     }
                 }
             },

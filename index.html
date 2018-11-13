@@ -219,9 +219,39 @@ service iptables-persistent save
 </pre>
 <h1>WHM FPM</h1>
 <pre>
+https://documentation.cpanel.net/display/68Docs/Configuration+Values+of+PHP-FPM
+
+# /scripts/php_fpm_config --rebuild
+# /scripts/restartsrv_apache_php_fpm
+
 /var/cpanel/ApachePHPFPM/system_pool_defaults.yaml
 
 find  /var/cpanel/userdata -name "*.php-fpm.yaml"
+
+
+/var/cpanel/userdata/<user>/<domain.com>.php-fpm.yaml
+php_admin_value_sendmail_path: {
+        name: 'php_admin_value[sendmail_path]',
+        value: '/usr/sbin/sendmail -t -i -fsales@domain.com'
+}
+request_terminate_timeout: 120
+pm_max_requests: 1000
+request_slowlog_timeout: 3
+slowlog: "var/log/php-fpm/$pool-slow.log"
+
+access_log: {
+    name: "access.log",
+    value: "var/log/php-fpm/$pool-access.log"
+}
+
+
+access_format: {
+    name: "access.format",
+    value: '"%R – %u %t \"%m %r%Q%q\" %s %f %{seconds}d %{kilo}M %C%%"'
+}
+
+</pre>
+<pre>
 
 /usr/local/cpanel/scripts/install_lets_encrypt_autossl_provider
 

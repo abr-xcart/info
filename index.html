@@ -250,6 +250,8 @@ access_format: {
     value: '"%R – %u %t \"%m %r%Q%q\" %s %f %{seconds}d %{kilo}M %C%%"'
 }
 
+find /opt/cpanel/ea-php*/root/etc/php-fpm.d/ -name "*.conf" -print -exec grep --color exec "{}" \;
+
 </pre>
 <pre>
 

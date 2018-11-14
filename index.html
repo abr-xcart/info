@@ -286,8 +286,10 @@ DKIM
                 "long_query_time": 1,
                 "concurrent_insert": "ALWAYS",
                 "join_buffer_size": "4M",
+                "key_buffer_size": "32M",
+		"table_open_cache": 2048,
+                "table_definition_cache": 2048,
                 "query_cache_size": "48M",
-                "key_buffer_size": "32M"
                 "query_cache_type": "1"
             }
         },

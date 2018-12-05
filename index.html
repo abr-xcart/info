@@ -322,5 +322,78 @@ DKIM
 <pre>
 mysql -BN -e "SHOW DATABASES" | grep -v mysql |grep -v _schema$ | xargs -n1 -I % bash -c 'echo -n "% - "; mysql -BN -e "SHOW TABLES" % | wc -l '
 </pre>
+
+<h1>APT</h1>
+<pre>
+apt list --upgradable |perl -pe 's#/.*##' | grep -v mysql | xargs
+</pre>
+
+<h1>CERTBOT</h1>
+<pre>
+
+sudo add-apt-repository ppa:nginx/stable
+apt-get update && apt-get remove nginx-common nginx nginx-naxsi && apt-get install nginx
+
+sudo add-apt-repository ppa:certbot/certbot
+apt install python-certbot-nginx python3-certbot-nginx
+
+</pre>
+
+<h1>ICINGA</h1>
+<pre>
+/etc/icinga2/commands/do-req.py
+cd /etc/icinga2/conf.d/
+git diff
+</pre>
+
+<h1>CHEF</h1>
+<pre>
+/usr/bin/chef-client | tee /var/log/chef/chef.run.`date -I`
+</pre>
+
+<h1>EXIM</h1>
+<pre>
+Sender Verification Callouts = On
+Send generic recipient failure messages = Off
+Allow DKIM verification for incoming messages = On
+
+custom_end_outgoing_smtp_checkall
+
+accept
+  hosts = *
+  logwrite = "Sender rate overlimit - $sender_host_address , but whitelisted..."
+  delay = 3s
+
+
+
+Section: TRANSPORTSTART
+remote_smtp_smart_dkim:
+  driver = smtp
+  hosts_require_tls = $host_address
+  hosts_require_auth = $host_address
+#  dkim_domain = $sender_address_domain
+#  dkim_selector = default
+#  dkim_private_key = "/var/cpanel/domain_keys/private/${dkim_domain}"
+#  dkim_canon = relaxed
+
+
+Section: ROUTERSTART
+send_via_google:
+  driver = manualroute
+  domains = !+local_domains
+  require_files = "+/var/cpanel/domain_keys/private/${sender_address_domain}"
+#  transport = remote_smtp_smart_dkim
+  transport = gmail_smtp
+  route_list = $domain smtp.gmail.com::587
+  senders = ^user@domain.com
+
+Section: AUTH
+manage_login:
+  driver = plaintext
+  public_name = PLAIN
+  client_send = ^user@domain.com^pass
+
+</pre>
+
 </body>
 </html>

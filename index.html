@@ -330,12 +330,14 @@ apt list --upgradable |perl -pe 's#/.*##' | grep -v mysql | xargs
 
 <h1>CERTBOT</h1>
 <pre>
+https://support.x-shops.com/wiki/doku.php?id=hosting:infrastructure_1.0:certbot
 
 sudo add-apt-repository ppa:nginx/stable
-apt-get update && apt-get remove nginx-common nginx nginx-naxsi && apt-get install nginx
-
 sudo add-apt-repository ppa:certbot/certbot
-apt install python-certbot-nginx python3-certbot-nginx
+apt-get update
+
+apt remove nginx-common nginx nginx-naxsi && apt install -y nginx
+apt install -y python-certbot-nginx python3-certbot-nginx
 
 </pre>
 

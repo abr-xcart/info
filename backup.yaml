@@ -1,6 +1,6 @@
 # vim: ts=2 sts=2 et paste:
 
-host: backup-redu.x-shops.com
+host: backup.x-shops.com
 duplicity:
   path:
     local: /usr/bin/duplicity

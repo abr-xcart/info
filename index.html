@@ -396,6 +396,11 @@ manage_login:
   client_send = ^user@domain.com^pass
 
 </pre>
+<pre>
+
+find /var/spool/goofy-agent -type f|xargs -n1 -I% bash -c  " strings % |grep Subject: "
+</pre>
+
 
 </body>
 </html>

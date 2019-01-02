@@ -317,6 +317,8 @@ DKIM
             "domains": {
                 "<DOMAIN>": {
                     "7.2": {
+                        "php_admin_value[sendmail_from]": "kickinkolor@kickinkolor.com",
+                        "php_admin_value[sendmail_path]": "/usr/sbin/sendmail -t -i -f kickinkolor@kickinkolor.com",
                         "request_terminate_timeout": 120,
                         "access.log": "/var/www/vhosts/<DOMAIN>/php.access.log",
                         "access.format": "%R – %u %t \"%m %r%Q%q\" %s %f %{seconds}d %{kilo}M %C%%",

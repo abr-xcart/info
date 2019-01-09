@@ -317,15 +317,14 @@ DKIM
             "domains": {
                 "<DOMAIN>": {
                     "7.2": {
-                        "php_admin_value[sendmail_from]": "kickinkolor@kickinkolor.com",
-                        "php_admin_value[sendmail_path]": "/usr/sbin/sendmail -t -i -f kickinkolor@kickinkolor.com",
+                        "php_admin_value[sendmail_from]": "admin@domain.com",
+                        "php_admin_value[sendmail_path]": "/usr/sbin/sendmail -t -i -f admin@domain.com",
                         "request_terminate_timeout": 120,
                         "access.log": "/var/www/vhosts/<DOMAIN>/php.access.log",
                         "access.format": "%R – %u %t \"%m %r%Q%q\" %s %f %{seconds}d %{kilo}M %C%%",
                         "slowlog": "/var/www/vhosts/<DOMAIN>/php.slow.log"
                         "request_slowlog_timeout": "1s",
-                        "slowlog": "/var/www/vhosts/farmer.live/php.slow.log",
-			"php_value[sendmail_path]": "/usr/sbin/sendmail -t -i -f info@<DOMAIN>"
+                        "php_admin_value[date.timezone]": "America/New_York"
                     }
                 }
             },

@@ -349,9 +349,11 @@ apt list --upgradable |perl -pe 's#/.*##' | grep -v mysql | grep -v nginx | xarg
 <h1>CERTBOT</h1>
 <pre>
 https://support.x-shops.com/wiki/doku.php?id=hosting:infrastructure_1.0:certbot
+nginx -t
+perl -i -pe "s#/gleniboutique.ru/#/`hostname`/#" /var/www/vhosts/system/`hostname`/conf/vhost_nginx.conf
 
-sudo add-apt-repository ppa:nginx/stable
-sudo add-apt-repository ppa:certbot/certbot
+sudo add-apt-repository -y ppa:nginx/stable
+sudo add-apt-repository -y ppa:certbot/certbot
 apt-get update
 
 apt remove nginx-common nginx nginx-naxsi && apt install -y nginx

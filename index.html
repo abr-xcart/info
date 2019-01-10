@@ -251,7 +251,8 @@ access_format: {
 }
 
 find /opt/cpanel/ea-php*/root/etc/php-fpm.d/ -name "*.conf" -print -exec grep --color exec "{}" \;
-
+find /opt/cpanel/ea-php*/root/usr/var/log/php-fpm/*slow*
+find /opt/cpanel/ea-php*/root/usr/var/log/php-fpm/*access*
 </pre>
 <pre>
 

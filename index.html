@@ -343,7 +343,7 @@ mysql -BN -e "SHOW DATABASES" | grep -v mysql |grep -v _schema$ | xargs -n1 -I %
 
 <h1>APT</h1>
 <pre>
-apt list --upgradable |perl -pe 's#/.*##' | grep -v mysql | grep -v nginx | xargs
+apt list --upgradable |perl -pe 's#/.*##' | grep -v mysql | grep -v nginx | xargs | grep "^Listing... " | perl -pe 's#^Listing\.\.\.#apt install -y#'
 </pre>
 
 <h1>CERTBOT</h1>

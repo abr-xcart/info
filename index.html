@@ -418,6 +418,16 @@ manage_login:
 </pre>
 
 <pre>
+cd /opt/cdev/venvs/icinga/bin
+. ./activate
+if [ ! -e requirements.txt ]; then pip freeze > requirements.txt; fi
+rm -rf  /root/.cache/pip/wheels/
+wget -q http://info.x-dev.us/requirements.txt
+diff <(pip freeze) requirements.txt
+
+</pre>
+
+<pre>
 find /var/spool/goofy-agent -type f|xargs -n1 -I% bash -c  " strings % |grep Subject: "
 </pre>
 

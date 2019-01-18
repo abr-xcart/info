@@ -90,6 +90,8 @@
             "domains": {
                 "<DOMAIN>": {
                     "7.2": {
+                        "mail.add_x_header": "on",
+                        "mail.log": "/var/www/vhosts/saccos.com/httpdocs/var/mail.log",
                         "php_admin_value[sendmail_from]": "admin@domain.com",
                         "php_admin_value[sendmail_path]": "/usr/sbin/sendmail -t -i -f admin@domain.com",
                         "request_terminate_timeout": 120,

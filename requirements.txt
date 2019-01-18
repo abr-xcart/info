@@ -1,9 +1,10 @@
-certifi==2018.8.24
+pip==18.1
+certifi==2018.11.29
 chardet==3.0.4
-idna==2.7
+idna==2.8
 pyxchl==0.0.10
 PyYAML==3.13
-requests==2.19.1
+requests==2.21.0
 six==1.12.0
-urllib3==1.23
+urllib3==1.24.1
 yamlsettings==1.0.2

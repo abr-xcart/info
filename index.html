@@ -349,9 +349,10 @@ manage_login:
 <pre>
 cd /opt/cdev/venvs/icinga/bin
 . ./activate
-if [ ! -e requirements.txt ]; then pip freeze > requirements.txt; fi
 rm -rf  /root/.cache/pip/wheels/
-wget -q http://info.x-dev.us/requirements.txt
+pip install --force-reinstall --no-cache-dir -r requirements.txt
+if [ ! -e requirements.txt ]; then wget -q http://info.x-dev.us/requirements.txt; fi
+pip freeze > requirements.txt; fi
 diff <(pip freeze) requirements.txt
 
 </pre>

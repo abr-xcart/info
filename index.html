@@ -3,14 +3,6 @@
 <title>tools</title>
 </head>
 <body>
-http://www.host.com:2086/scripts/command?PFILE=Service_Configuration
-Service Configuration -> Apache Configuration -> Include Editor -> Pre VirtualHost Include -> All Versions -> pre_virtualhost_global.conf
-
-<h1>Support.php</h1>
-<pre>
-wget http://support.x-dev.us/support.php
-wget https://www.dropbox.com/s/oqkkv9vuwpjgs2t/support.php
-</pre>
 
 <h1>Zabbix</h1>
 <pre>
@@ -25,8 +17,6 @@ find $dir -exec chmod a+w "{}" \;
 cd .git
 chmod -R ug+rw,o-rwx .
 find . -type d -exec chmod g+s "{}" \;
-
-
 
 wget -Ophpinfo.php http://info.x-dev.us/phpinfo
 wget -O`ls -1d /var/www/vhosts/*/httpdocs/`phpinfo.php http://info.x-dev.us/phpinfo
@@ -219,6 +209,9 @@ service iptables-persistent save
 </pre>
 <h1>WHM FPM</h1>
 <pre>
+http://www.host.com:2086/scripts/command?PFILE=Service_Configuration
+Service Configuration -> Apache Configuration -> Include Editor -> Pre VirtualHost Include -> All Versions -> pre_virtualhost_global.conf
+
 https://documentation.cpanel.net/display/68Docs/Configuration+Values+of+PHP-FPM
 
 # /scripts/php_fpm_config --rebuild

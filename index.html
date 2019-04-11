@@ -7,6 +7,8 @@
 <h1>Docker</h1>
 <pre>
 yes | docker image prune -a
+# Docker images inspect
+docker images | tail -n +2 | perl -pe 's#(.*?)\s+(.*?)\s+(.*?)\s+.*#echo "\# $1:$2" > $3.json ;docker inspect $3 >> $3.json #'  | sh
 </pre>
 
 <h1>Zabbix</h1>

@@ -13,6 +13,7 @@ set foldmethod=marker
 set foldlevelstart=1
 set background=light
 set et
+set wrap
 "if !&diff
 "  set undodir=~/.vim/backup
 "  set undofile

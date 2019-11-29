@@ -387,6 +387,12 @@ Require remote (hostname/IP address) HELO
 # cat /etc/sysconfig/docker
 export HTTP_PROXY="http://USERNAME:PASSWORD@[your.proxy.server]:[port]"
 export HTTPS_PROXY="https://USERNAME:PASSWORD@[your.proxy.server]:[port]"
+<h1>Centos</h1>
+<pre>
+dracut --force --regenerate-all
+/etc/default/grub
+grub2-mkconfig -o /boot/grub2/grub.cfg
+</pre>
 
 </body>
 </html>

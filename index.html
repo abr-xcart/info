@@ -393,6 +393,9 @@ dracut --force --regenerate-all
 /etc/default/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 </pre>
+<pre>
+INDEX=$(date "+%j%%15" | bc)
+</pre>
 
 </body>
 </html>

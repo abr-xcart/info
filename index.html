@@ -395,7 +395,18 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 </pre>
 <pre>
 INDEX=$(date "+%j%%15" | bc)
-</pre>
 
+vimdiff $HOME/.local/share/kxmlgui5/konsole/konsoleui.rc ./.local/share/kxmlgui5/konsole/konsoleui.rc 
+
+</pre>
+add-apt-repository ppa:yannubuntu/boot-repair
+apt-get update
+apt-get install -y boot-repair && boot-repair
+mount -t proc none /mnt/proc
+mount -o bind /dev /mnt/dev
+mount -t sysfs /sys /mnt/sys
+chroot /mnt
+grub-install /dev/sda
+grub2-mkconfig -o /boot/grub2/grub.cfg
 </body>
 </html>

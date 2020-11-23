@@ -408,5 +408,46 @@ mount -t sysfs /sys /mnt/sys
 chroot /mnt
 grub-install /dev/sda
 grub2-mkconfig -o /boot/grub2/grub.cfg
+
+</pre>
+<pre>
+/etc/NetworkManager/NetworkManager.conf
+[main]
+plugins=keyfile
+dns=dnsmasq
+</pre>
+<pre>
+powershell
+gwmi win32_operatingsystem|select Version
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+Invoke-WebRequest -Uri https://aka.ms/wsl-ubuntu-1804 -OutFile ~/Ubuntu.zip -UseBasicParsing
+Expand-Archive ~/Ubuntu.zip C:\Distros\Ubuntu
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Enable-WindowsOptionalFeature -Online -FeatureName Containers -All
+
+Register-PSRepository -Default
+
+Find-PackageProvider ContainerImage -Verbose
+Find-Module ContainerImage -Verbose
+Get-PackageProvider -ListAvailable
+
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+
+</pre>
+Register-PSRepository -Name "PSGallery" –SourceLocation "https://www.powershellgallery.com/api/v2/" -InstallationPolicy Trusted
+
+
+
+shell request failed on channel 0
+/etc/security/limits.d/20-nproc.conf
+<pre>
+sudo cp -v /usr/share/systemd/tmp.mount /etc/systemd/system/ 
+sudo systemctl enable tmp.mount
+</pre>
+<pre>
+</pre>
+dd if=/dev/mapper/vg_thin01-volA of=/dev/mapper/vg_thin02-volA conv=sparse
+
+
 </body>
 </html>

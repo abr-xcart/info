@@ -20,7 +20,7 @@ set ssl:ca-file "/etc/ssl/certs/ca-certificates.crt"
 <pre>
 yes | docker image prune -a
 # Docker images inspect
-docker images | tail -n +2 | perl -pe 's#(.*?)\s+(.*?)\s+(.*?)\s+.*#echo "\# $1:$2" > $3.json ;docker inspect $3 >> $3.json #'  | sh
+docker images | tail -n +2 | perl -pe 's#(.*?)\s+(.*?)\s+(.*?)\s+.*#echo "\# $1:$2" > $3.json ;docker inspect $3 >> $3.json #' | sh
 </pre>
 
 <h1>Zabbix</h1>
@@ -41,7 +41,7 @@ wget -Ophpinfo.php http://info.x-dev.us/phpinfo
 wget -O`ls -1d /var/www/vhosts/*/httpdocs/`phpinfo.php http://info.x-dev.us/phpinfo
 
 wget -O/etc/profile.d/abr.sh http://info.x-dev.us/abr.sh
-wget -Oxcheck.php  http://info.x-dev.us/xcheck/xcheck.php
+wget -Oxcheck.php http://info.x-dev.us/xcheck/xcheck.php
 wget -Omod_install.php http://info.x-dev.us/mod_install/mod_install.php
 wget -Oftp.php http://info.x-dev.us/ftp/ftp.php
 wget -Oatar.php http://info.x-dev.us/atar/atar.php
@@ -69,9 +69,9 @@ UPDATE xcart_images_T SET image_path = REPLACE(image_path,@src,@dst) WHERE image
 
 UPDATE xcart_config SET value = REPLACE( value,@src,@dst) WHERE name IN ('icons_path','thumbnails_path','det_images_path');
 ==== SHOP CLOSED
-SET @shop_closed = ( SELECT IF( value = "Y", "N", "Y") as val FROM xcart_config WHERE name = "shop_closed" );                 
-UPDATE xcart_config SET value = @shop_closed WHERE name = 'shop_closed';                                                      
-SELECT value FROM xcart_config WHERE name = "shop_closed";                                                                    
+SET @shop_closed = ( SELECT IF( value = "Y", "N", "Y") as val FROM xcart_config WHERE name = "shop_closed" );
+UPDATE xcart_config SET value = @shop_closed WHERE name = 'shop_closed';
+SELECT value FROM xcart_config WHERE name = "shop_closed";
 </pre>
 <h1>VIM</h1>
 <pre>
@@ -79,8 +79,8 @@ SELECT value FROM xcart_config WHERE name = "shop_closed";
 :e ++ff=unix
 :%s/\r//g
 
-:s@^--- xcart/\([^\t]\+\)\t@Index: \1\r\0@g                                                                                   
-:,/^Index:/-1d                                                                                                                
+:s@^--- xcart/\([^\t]\+\)\t@Index: \1\r\0@g
+:,/^Index:/-1d
 </pre>
 <h1>SQL PARSER</h1>
 <pre>
@@ -201,7 +201,7 @@ git config --global core.pager 'less -R'
 </pre>
 <pre>
 visudo
-Defaults    env_keep += SSH_AUTH_SOCK
+Defaults env_keep += SSH_AUTH_SOCK
 </pre>
 <h1>gnupg.vim</h1>
 <pre>
@@ -223,7 +223,7 @@ service iptables-persistent save
 <h1>personal demo</h1>
 <pre>
 
-начиная с  5.3.3.3 процедура удаления  модуля  Trial  следующая
+начиная с 5.3.3.3 процедура удаления модуля Trial следующая
 - в etc/config.php в секцию [performance] добавить ignore_system_modules = On
 - сделать ребилд кеша в магазине
 - на странице My addons найти модуль Trial и удалить его
@@ -240,13 +240,13 @@ https://documentation.cpanel.net/display/68Docs/Configuration+Values+of+PHP-FPM
 
 /var/cpanel/ApachePHPFPM/system_pool_defaults.yaml
 
-find  /var/cpanel/userdata -name "*.php-fpm.yaml"
+find /var/cpanel/userdata -name "*.php-fpm.yaml"
 
 
 /var/cpanel/userdata/<user>/<domain.com>.php-fpm.yaml
 php_admin_value_sendmail_path: {
-        name: 'php_admin_value[sendmail_path]',
-        value: '/usr/sbin/sendmail -t -i -fsales@domain.com'
+  name: 'php_admin_value[sendmail_path]',
+  value: '/usr/sbin/sendmail -t -i -fsales@domain.com'
 }
 request_terminate_timeout: 120
 pm_max_requests: 1000
@@ -363,7 +363,7 @@ manage_login:
 <pre>
 cd /opt/cdev/venvs/icinga/bin
 . ./activate
-rm -rf  /root/.cache/pip/wheels/
+rm -rf /root/.cache/pip/wheels/
 if [ ! -e requirements.txt ]; then wget -q http://info.x-dev.us/requirements.txt; fi
 pip install --force-reinstall --no-cache-dir -r requirements.txt
 pip freeze > requirements.txt
@@ -372,7 +372,7 @@ diff <(pip freeze) requirements.txt
 </pre>
 
 <pre>
-find /var/spool/goofy-agent -type f|xargs -n1 -I% bash -c  " strings % |grep Subject: "
+find /var/spool/goofy-agent -type f|xargs -n1 -I% bash -c " strings % |grep Subject: "
 </pre>
 
 <pre>
@@ -448,6 +448,10 @@ sudo systemctl enable tmp.mount
 </pre>
 dd if=/dev/mapper/vg_thin01-volA of=/dev/mapper/vg_thin02-volA conv=sparse
 
-
+<pre>
+lvconvert -m1 /dev/centos/docker --mirrorlog core --type mirror --stripes 2 /dev/sdc /dev/sdd
+lvs --all --segments -o +devices
+lvconvert -m0 /dev/centos/docker /dev/sda
+</pre>
 </body>
 </html>

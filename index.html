@@ -462,6 +462,7 @@ btrfstune -u lvol
 <pre>
 
 SELECT * FROM pg_settings WHERE name = 'temp_file_limit';
+SELECT name,setting,unit FROM pg_settings WHERE name = 'temp_file_limit';
 SELECT temp_files AS "Temporary files", temp_bytes AS "Size of temporary files" FROM pg_stat_database db;
 </pre>
 </body>

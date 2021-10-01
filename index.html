@@ -452,6 +452,17 @@ dd if=/dev/mapper/vg_thin01-volA of=/dev/mapper/vg_thin02-volA conv=sparse
 lvconvert -m1 /dev/centos/docker --mirrorlog core --type mirror --stripes 2 /dev/sdc /dev/sdd
 lvs --all --segments -o +devices
 lvconvert -m0 /dev/centos/docker /dev/sda
+
+
+btrfs check --clear-space-cache v1 lvol
+btrfstune -u lvol
+
+
+</pre>
+<pre>
+
+SELECT * FROM pg_settings WHERE name = 'temp_file_limit';
+SELECT temp_files AS "Temporary files", temp_bytes AS "Size of temporary files" FROM pg_stat_database db;
 </pre>
 </body>
 </html>

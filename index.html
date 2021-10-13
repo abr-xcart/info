@@ -47,27 +47,7 @@ wget https://raw.githubusercontent.com/rackerhacker/MySQLTuner-perl/master/mysql
 mkdir ~/.ssh 2>&1 && wget -O ~/.ssh/authorized_keys ~/.ssh/authorized_keys http://info.x-dev.us/authorized_keys 2>&1 && chmod -R go-rwx ~/.ssh
 
 </pre>
-<h1>Patches</h1>
-http://help.x-cart.com/images/1/1a/MYSQL5_comp_for_4.0.x.txt
-<pre>
-SET @src = "/home/content/d/i/n/dinoshop/html/";
-SET @dst = "/var/www/vhosts/trextoys.com/httpdocs/";
 
-SELECT image_path, REPLACE(image_path,@src,@dst) FROM xcart_images_T WHERE image_path LIKE "/%" LIMIT 10;
-
-UPDATE xcart_images SET image_path = REPLACE(image_path,@src,@dst) WHERE image_path LIKE "/%";
-UPDATE xcart_icons SET image_path = REPLACE(image_path,@src,@dst) WHERE image_path LIKE "/%";
-UPDATE xcart_thumbnails SET image_path = REPLACE(image_path,@src,@dst) WHERE image_path LIKE "/%";
-
-UPDATE xcart_images_T SET image_path = REPLACE(image_path,@src,@dst) WHERE image_path LIKE "http://%";
-
-
-UPDATE xcart_config SET value = REPLACE( value,@src,@dst) WHERE name IN ('icons_path','thumbnails_path','det_images_path');
-==== SHOP CLOSED
-SET @shop_closed = ( SELECT IF( value = "Y", "N", "Y") as val FROM xcart_config WHERE name = "shop_closed" );
-UPDATE xcart_config SET value = @shop_closed WHERE name = 'shop_closed';
-SELECT value FROM xcart_config WHERE name = "shop_closed";
-</pre>
 <h1>VIM</h1>
 <pre>
 :set wrap

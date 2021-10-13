@@ -262,6 +262,10 @@ git diff
 
 <h1>EXIM</h1>
 <pre>
+Exim Configuration Manager
+
+Require remote (hostname/IP address) HELO
+
 Sender Verification Callouts = On
 Send generic recipient failure messages = Off
 Allow DKIM verification for incoming messages = On
@@ -323,10 +327,6 @@ find /var/spool/goofy-agent -type f|xargs -n1 -I% bash -c " strings % |grep Subj
 rm -rf var/run var/datacache/ ; while true ; do php admin.php ; done
 </pre>
 
-EXIM
-Exim Configuration Manager
-
-Require remote (hostname/IP address) HELO
 
 # cat /etc/sysconfig/docker
 export HTTP_PROXY="http://USERNAME:PASSWORD@[your.proxy.server]:[port]"
@@ -337,12 +337,14 @@ dracut --force --regenerate-all
 /etc/default/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 </pre>
+
 <pre>
 INDEX=$(date "+%j%%15" | bc)
 
 vimdiff $HOME/.local/share/kxmlgui5/konsole/konsoleui.rc ./.local/share/kxmlgui5/konsole/konsoleui.rc 
-
 </pre>
+
+<pre>
 add-apt-repository ppa:yannubuntu/boot-repair
 apt-get update
 apt-get install -y boot-repair && boot-repair

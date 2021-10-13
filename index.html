@@ -23,12 +23,7 @@ yes | docker image prune -a
 docker images | tail -n +2 | perl -pe 's#(.*?)\s+(.*?)\s+(.*?)\s+.*#echo "\# $1:$2" > $3.json ;docker inspect $3 >> $3.json #' | sh
 </pre>
 
-<h1>Zabbix</h1>
-<pre>
-wget -O ~/za.sh -q http://info.x-dev.us/za.sh && sh ~/za.sh
-wget -O ~/zp.sh -q http://info.x-dev.us/zp.sh && sh ~/zp.sh
-</pre>
-
+<h1>Support</h1>
 <pre>
 dir="var log files catalog templates_c .pgp skin* images"
 find $dir -exec chmod a+w "{}" \;

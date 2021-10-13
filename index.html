@@ -354,12 +354,18 @@ grub-install /dev/sda
 grub2-mkconfig -o /boot/grub2/grub.cfg
 
 </pre>
+
+<h1>NetworkManager</h1>
 <pre>
 /etc/NetworkManager/NetworkManager.conf
 [main]
 plugins=keyfile
 dns=dnsmasq
+
+nmtui
 </pre>
+
+<h1>PS</h1>
 <pre>
 powershell
 gwmi win32_operatingsystem|select Version
@@ -377,20 +383,22 @@ Get-PackageProvider -ListAvailable
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 
-</pre>
 Register-PSRepository -Name "PSGallery" –SourceLocation "https://www.powershellgallery.com/api/v2/" -InstallationPolicy Trusted
 
-
-
+</pre>
 shell request failed on channel 0
 /etc/security/limits.d/20-nproc.conf
+
+<h1>tmp</h1>
 <pre>
 sudo cp -v /usr/share/systemd/tmp.mount /etc/systemd/system/ 
 sudo systemctl enable tmp.mount
 </pre>
+
+<h1>dd</h1>
 <pre>
-</pre>
 dd if=/dev/mapper/vg_thin01-volA of=/dev/mapper/vg_thin02-volA conv=sparse
+</pre>
 
 <pre>
 lvconvert -m1 /dev/centos/docker --mirrorlog core --type mirror --stripes 2 /dev/sdc /dev/sdd

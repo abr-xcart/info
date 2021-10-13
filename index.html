@@ -110,16 +110,6 @@ printf ":g/qt_debug/d\n:x\n" | ex FILE
 pcregrep -l --color -r --exclude_dir='(?:log|upgrade|cache|tmp|templates_c)' --include='\.php$' <PATTERN> <PATH>
 </pre>
 
-<h1>CVS</h1>
-<pre>
-export CVSROOT=:ext:cvs@cvs.x-dev.us:/home/cvs/WORK/PRIVATE/src/CVS
-export CVS_RSH=ssh
-alias cvsd='cvs diff -u | colordiff | less -R'
-
-If getting sticky tag for file "is not a branch" error when trying to do cvs ci,
-Just run cvs update -A on these files to revert your working copy to the head revisions.
-</pre>
-
 <h1>GIT</h1>
 <pre>
 # Initialize GIT repo

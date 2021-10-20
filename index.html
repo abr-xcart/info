@@ -418,6 +418,10 @@ btrfstune -u lvol
 SELECT * FROM pg_settings WHERE name = 'temp_file_limit';
 SELECT name,setting,unit FROM pg_settings WHERE name = 'temp_file_limit';
 SELECT temp_files AS "Temporary files", temp_bytes AS "Size of temporary files" FROM pg_stat_database db;
+
+/dev/sdf1
+xfs_admin -U `uuidgen` /dev/sdf1
+tune2fs -U random /dev/sdb1 
 </pre>
 </body>
 </html>

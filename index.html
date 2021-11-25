@@ -6,7 +6,8 @@
 
 <h1>IBS</h1>
 <pre>
-sudo update-ca-certificates
+update-ca-certificates
+
 /etc/ssl/certs/ca-certificates.crt
 set ssl:ca-file "/etc/ssl/certs/ca-certificates.crt"
 </pre>
@@ -64,7 +65,8 @@ mkdir ~/.ssh 2>&1 && wget -O ~/.ssh/authorized_keys ~/.ssh/authorized_keys http:
 </pre>
 <h1>GREP</h1>
 <pre>
-sudo update-alternatives --config editor
+update-alternatives --config editor
+update-alternatives --config vi
 
 cat &lt;&lt; EOL &gt;&gt; /etc/bashrc
 export EDITOR=`which vim`
@@ -426,6 +428,13 @@ SELECT temp_files AS "Temporary files", temp_bytes AS "Size of temporary files" 
 /dev/sdf1
 xfs_admin -U `uuidgen` /dev/sdf1
 tune2fs -U random /dev/sdb1 
+
+
+Get-LocalUser -Name planeta | Select-Object *
+Set-LocalUser -Name planeta -PasswordNeverExpires:$true
+Get-LocalUser | where { $_.passwordNeverExpires -eq "true" -and $_.PasswordNeverExpires -eq "true" }
+
+
 </pre>
 </body>
 </html>

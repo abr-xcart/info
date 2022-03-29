@@ -19,7 +19,13 @@ set ssl:ca-file "/etc/ssl/certs/ca-certificates.crt"
 
 <h1>Docker</h1>
 <pre>
+# cat /etc/sysconfig/docker
+export HTTP_PROXY="http://USERNAME:PASSWORD@[your.proxy.server]:[port]"
+export HTTPS_PROXY="https://USERNAME:PASSWORD@[your.proxy.server]:[port]"
+
+#
 yes | docker image prune -a
+
 # Docker images inspect
 docker images | tail -n +2 | perl -pe 's#(.*?)\s+(.*?)\s+(.*?)\s+.*#echo "\# $1:$2" > $3.json ;docker inspect $3 >> $3.json #' | sh
 </pre>
@@ -63,6 +69,14 @@ mkdir ~/.ssh 2>&1 && wget -O ~/.ssh/authorized_keys ~/.ssh/authorized_keys http:
 :s/\(SELECT\|FROM\|INNER JOIN\|LEFT JOIN\|GROUP BY\|WHERE\|JOIN\|ORDER BY\|HAVING\|LIMIT\) /\r\1 \r\t/gi
 :s/\(SELECT\( DISTINCT\)\?\|FROM\|INNER JOIN\|LEFT JOIN\|GROUP BY\|WHERE\|JOIN\|ORDER BY\|HAVING\|LIMIT\) /\r\1 \r\t/gi
 </pre>
+
+<h1>gnupg.vim</h1>
+<pre>
+mkdir -p $HOME/.vim/plugin
+export GPG_TTY=`tty`
+wget -O $HOME/.vim/plugin/gnupg.vim "http://www.vim.org/scripts/download_script.php?src_id=12200"
+</pre>
+
 <h1>GREP</h1>
 <pre>
 update-alternatives --config editor
@@ -93,19 +107,8 @@ pcregrep -l --color -r --exclude_dir='(?:log|upgrade|cache|tmp|templates_c)' --i
 git init --separate-git-dir=
 git ci -m INIT --allow-empty
 
-# system settings
-git add robots.txt .user.ini php.ini .gitignore
-git ci -m "system settings"
-
-# cleanup
-find . -name "*~" -print0 | xargs --no-run-if-empty -n 1 -0 git add
-find . -name "*.orig" -print0 | xargs --no-run-if-empty -n 1 -0 git add
-find . -name "*.ori" -print0 | xargs --no-run-if-empty -n 1 -0 git add
-find . -name "*OLD" -print0 | xargs --no-run-if-empty -n 1 -0 git add
-find . -name "*.bak" -print0 | xargs --no-run-if-empty -n 1 -0 git add
-
-
 </pre>
+
 <a href="https://docs.google.com/document/d/1kiHvoNl7G-O4VxjGpV2egTAb8_VQXV-q1mARJLEsFco/edit#">https://docs.google.com/document/d/1kiHvoNl7G-O4VxjGpV2egTAb8_VQXV-q1mARJLEsFco/edit#</a>
 <pre>
 # Setup Client Env Vars for Git
@@ -148,12 +151,6 @@ git config --global core.pager 'less -R'
 visudo
 Defaults env_keep += SSH_AUTH_SOCK
 </pre>
-<h1>gnupg.vim</h1>
-<pre>
-mkdir -p $HOME/.vim/plugin
-export GPG_TTY=`tty`
-wget -O $HOME/.vim/plugin/gnupg.vim "http://www.vim.org/scripts/download_script.php?src_id=12200"
-</pre>
 
 https://support.cloudflare.com/hc/en-us/articles/200169166-How-do-I-whitelist-CloudFlare-s-IP-addresses-in-iptables-
 
@@ -165,14 +162,6 @@ for x in $(curl http://info.x-dev.us/qtmsoft-ips.txt); do ipset add $SET $x; don
 iptables -A INPUT -m set --match-set $SET src -p tcp -m multiport --dports 1022 -j ACCEPT
 service iptables-persistent save
 
-<h1>personal demo</h1>
-<pre>
-
-начиная с 5.3.3.3 процедура удаления модуля Trial следующая
-- в etc/config.php в секцию [performance] добавить ignore_system_modules = On
-- сделать ребилд кеша в магазине
-- на странице My addons найти модуль Trial и удалить его
-</pre>
 <h1>WHM FPM</h1>
 <pre>
 http://www.host.com:2086/scripts/command?PFILE=Service_Configuration
@@ -222,11 +211,6 @@ DKIM
 /var/cpanel/domain_keys/public
 
 
-</pre>
-
-<h1>SQL DB</h1>
-<pre>
-mysql -BN -e "SHOW DATABASES" | grep -v mysql |grep -v _schema$ | xargs -n1 -I % bash -c 'echo -n "% - "; mysql -BN -e "SHOW TABLES" % | wc -l '
 </pre>
 
 <h1>APT</h1>
@@ -309,6 +293,7 @@ manage_login:
 
 </pre>
 
+<h1>ICINGA2</h1>
 <pre>
 cd /opt/cdev/venvs/icinga/bin
 . ./activate
@@ -320,18 +305,6 @@ diff <(pip freeze) requirements.txt
 
 </pre>
 
-<pre>
-find /var/spool/goofy-agent -type f|xargs -n1 -I% bash -c " strings % |grep Subject: "
-</pre>
-
-<pre>
-rm -rf var/run var/datacache/ ; while true ; do php admin.php ; done
-</pre>
-
-
-# cat /etc/sysconfig/docker
-export HTTP_PROXY="http://USERNAME:PASSWORD@[your.proxy.server]:[port]"
-export HTTPS_PROXY="https://USERNAME:PASSWORD@[your.proxy.server]:[port]"
 <h1>Centos</h1>
 <pre>
 dracut --force --regenerate-all

@@ -342,12 +342,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 </pre>
 
 <pre>
-INDEX=$(date "+%j%%15" | bc)
-
-vimdiff $HOME/.local/share/kxmlgui5/konsole/konsoleui.rc ./.local/share/kxmlgui5/konsole/konsoleui.rc 
-</pre>
-
-<pre>
 add-apt-repository ppa:yannubuntu/boot-repair
 apt-get update
 apt-get install -y boot-repair && boot-repair
@@ -356,8 +350,14 @@ mount -o bind /dev /mnt/dev
 mount -t sysfs /sys /mnt/sys
 chroot /mnt
 grub-install /dev/sda
-grub2-mkconfig -o /boot/grub2/grub.cfg
 
+</pre>
+
+<h1>BASH</h1>
+<pre>
+balooctl disable
+INDEX=$(date "+%j%%15" | bc)
+vimdiff $HOME/.local/share/kxmlgui5/konsole/konsoleui.rc ./.local/share/kxmlgui5/konsole/konsoleui.rc 
 </pre>
 
 <h1>NetworkManager</h1>
@@ -387,17 +387,20 @@ Find-Module ContainerImage -Verbose
 Get-PackageProvider -ListAvailable
 
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-
 Register-PSRepository -Name "PSGallery" –SourceLocation "https://www.powershellgallery.com/api/v2/" -InstallationPolicy Trusted
 
+Get-LocalUser -Name planeta | Select-Object *
+Set-LocalUser -Name planeta -PasswordNeverExpires:$true
+Get-LocalUser | where { $_.passwordNeverExpires -eq "true" -and $_.PasswordNeverExpires -eq "true" }
 </pre>
-shell request failed on channel 0
-/etc/security/limits.d/20-nproc.conf
 
 <h1>tmp</h1>
 <pre>
 sudo cp -v /usr/share/systemd/tmp.mount /etc/systemd/system/ 
 sudo systemctl enable tmp.mount
+
+shell request failed on channel 0
+/etc/security/limits.d/20-nproc.conf
 </pre>
 
 <h1>dd</h1>
@@ -411,16 +414,16 @@ lvs --all --segments -o +devices
 lvconvert -m0 /dev/centos/docker /dev/sda
 
 
-btrfs check --clear-space-cache v1 lvol
-btrfstune -u lvol
-
-
+btrfs check --clear-space-cache v1 volume
+btrfstune -u volume
 </pre>
+
 <h1>fstab</h1>
 <pre>
 </pre>
-<pre>
 
+<h1>postgres</h1>
+<pre>
 SELECT * FROM pg_settings WHERE name = 'temp_file_limit';
 SELECT name,setting,unit FROM pg_settings WHERE name = 'temp_file_limit';
 SELECT temp_files AS "Temporary files", temp_bytes AS "Size of temporary files" FROM pg_stat_database db;
@@ -430,9 +433,6 @@ xfs_admin -U `uuidgen` /dev/sdf1
 tune2fs -U random /dev/sdb1 
 
 
-Get-LocalUser -Name planeta | Select-Object *
-Set-LocalUser -Name planeta -PasswordNeverExpires:$true
-Get-LocalUser | where { $_.passwordNeverExpires -eq "true" -and $_.PasswordNeverExpires -eq "true" }
 
 
 </pre>

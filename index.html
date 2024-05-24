@@ -1,3 +1,6 @@
+<!--
+vim: paste hls
+-->
 <html>
 <head>
 <title>tools</title>
@@ -30,29 +33,10 @@ yes | docker image prune -a
 docker images | tail -n +2 | perl -pe 's#(.*?)\s+(.*?)\s+(.*?)\s+.*#echo "\# $1:$2" > $3.json ;docker inspect $3 >> $3.json #' | sh
 </pre>
 
-<h1>Support</h1>
+<h1>MySQL</h1>
 <pre>
-dir="var log files catalog templates_c .pgp skin* images"
-find $dir -exec chmod a+w "{}" \;
-
-cd .git
-chmod -R ug+rw,o-rwx .
-find . -type d -exec chmod g+s "{}" \;
-
-wget -Ophpinfo.php http://info.x-dev.us/phpinfo
-wget -O`ls -1d /var/www/vhosts/*/httpdocs/`phpinfo.php http://info.x-dev.us/phpinfo
-
-wget -O/etc/profile.d/abr.sh http://info.x-dev.us/abr.sh
-wget -Oxcheck.php http://info.x-dev.us/xcheck/xcheck.php
-wget -Omod_install.php http://info.x-dev.us/mod_install/mod_install.php
-wget -Oftp.php http://info.x-dev.us/ftp/ftp.php
-wget -Oatar.php http://info.x-dev.us/atar/atar.php
-
 wget http://www.day32.com/MySQL/tuning-primer.sh
 wget https://raw.githubusercontent.com/rackerhacker/MySQLTuner-perl/master/mysqltuner.pl
-
-mkdir ~/.ssh 2>&1 && wget -O ~/.ssh/authorized_keys ~/.ssh/authorized_keys http://info.x-dev.us/authorized_keys 2>&1 && chmod -R go-rwx ~/.ssh
-
 </pre>
 
 <h1>VIM</h1>
@@ -97,8 +81,6 @@ export EXCLUDES=$(for e in so bin exe dll cur cpp pl orig lst ico jpeg JPG jpg p
 alias grep="grep --color=auto $EXCLUDES"
 printf ":g/qt_debug/d\n:x\n" | ex FILE
 
-# === grep XCart PHP files ===
-pcregrep -l --color -r --exclude_dir='(?:log|upgrade|cache|tmp|templates_c)' --include='\.php$' <PATTERN> <PATH>
 </pre>
 
 <h1>GIT</h1>
@@ -213,36 +195,11 @@ DKIM
 
 </pre>
 
-<h1>APT</h1>
-<pre>
-apt list --upgradable |perl -pe 's#/.*##' | grep -v mysql | grep -v nginx | xargs | grep "^Listing... " | perl -pe 's#^Listing\.\.\.#apt install -y#'
-</pre>
-
-<h1>CERTBOT</h1>
-<pre>
-https://support.x-shops.com/wiki/doku.php?id=hosting:infrastructure_1.0:certbot
-nginx -t
-perl -i -pe "s#/gleniboutique.ru/#/`hostname`/#" /var/www/vhosts/system/`hostname`/conf/vhost_nginx.conf
-
-sudo add-apt-repository -y ppa:nginx/stable
-sudo add-apt-repository -y ppa:certbot/certbot
-apt-get update
-
-apt remove nginx-common nginx nginx-naxsi && apt install -y nginx
-apt install -y python-certbot-nginx python3-certbot-nginx
-
-</pre>
-
 <h1>ICINGA</h1>
 <pre>
 /etc/icinga2/commands/do-req.py
 cd /etc/icinga2/conf.d/
 git diff
-</pre>
-
-<h1>CHEF</h1>
-<pre>
-/usr/bin/chef-client | tee /var/log/chef/chef.run.`date -I`
 </pre>
 
 <h1>EXIM</h1>
@@ -300,7 +257,7 @@ cd /opt/cdev/venvs/icinga/bin
 rm -rf /root/.cache/pip/wheels/
 if [ ! -e requirements.txt ]; then wget -q http://info.x-dev.us/requirements.txt; fi
 pip install --force-reinstall --no-cache-dir -r requirements.txt
-pip freeze > requirements.txt
+pip freeze &gt; requirements.txt
 diff <(pip freeze) requirements.txt
 
 </pre>

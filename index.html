@@ -30,7 +30,7 @@ export HTTPS_PROXY="https://USERNAME:PASSWORD@[your.proxy.server]:[port]"
 yes | docker image prune -a
 
 # Docker images inspect
-docker images | tail -n +2 | perl -pe 's#(.*?)\s+(.*?)\s+(.*?)\s+.*#echo "\# $1:$2" > $3.json ;docker inspect $3 >> $3.json #' | sh
+docker images | tail -n +2 | perl -pe 's#(.*?)\s+(.*?)\s+(.*?)\s+.*#echo "\# $1:$2" &gt; $3.json ;docker inspect $3 &gt;&gt; $3.json #' | sh
 </pre>
 
 <h1>MySQL</h1>
@@ -94,19 +94,19 @@ git ci -m INIT --allow-empty
 <a href="https://docs.google.com/document/d/1kiHvoNl7G-O4VxjGpV2egTAb8_VQXV-q1mARJLEsFco/edit#">https://docs.google.com/document/d/1kiHvoNl7G-O4VxjGpV2egTAb8_VQXV-q1mARJLEsFco/edit#</a>
 <pre>
 # Setup Client Env Vars for Git
-cat << EOL >> $HOME/.ssh/config
+cat << EOL &gt;&gt; $HOME/.ssh/config
 Host *
 SendEnv GIT_AUTHOR_NAME
 SendEnv GIT_AUTHOR_EMAIL
 EOL
 
-cat << EOL >> $HOME/.bashrc
+cat << EOL &gt;&gt; $HOME/.bashrc
 export GIT_AUTHOR_NAME="Yuriy Abramov"
 export GIT_AUTHOR_EMAIL="YAbramov@ibs.ru"
 EOL
 
 # Setup Server Env Vars for Git
-echo "AcceptEnv GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL" >> /etc/ssh/sshd_config
+echo "AcceptEnv GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL" &gt;&gt; /etc/ssh/sshd_config
 sudo sshd -t && service sshd reload
 
 # General Git config
@@ -147,7 +147,7 @@ service iptables-persistent save
 <h1>WHM FPM</h1>
 <pre>
 http://www.host.com:2086/scripts/command?PFILE=Service_Configuration
-Service Configuration -> Apache Configuration -> Include Editor -> Pre VirtualHost Include -> All Versions -> pre_virtualhost_global.conf
+Service Configuration -&gt; Apache Configuration -&gt; Include Editor -&gt; Pre VirtualHost Include -&gt; All Versions -&gt; pre_virtualhost_global.conf
 
 https://documentation.cpanel.net/display/68Docs/Configuration+Values+of+PHP-FPM
 
@@ -184,22 +184,13 @@ find /opt/cpanel/ea-php*/root/etc/php-fpm.d/ -name "*.conf" -print -exec grep --
 find /opt/cpanel/ea-php*/root/usr/var/log/php-fpm/*slow*
 find /opt/cpanel/ea-php*/root/usr/var/log/php-fpm/*access*
 </pre>
-<pre>
 
+<pre>
 /usr/local/cpanel/scripts/install_lets_encrypt_autossl_provider
 
 DKIM
 /usr/local/cpanel/bin/dkim_keys_install system
 /var/cpanel/domain_keys/public
-
-
-</pre>
-
-<h1>ICINGA</h1>
-<pre>
-/etc/icinga2/commands/do-req.py
-cd /etc/icinga2/conf.d/
-git diff
 </pre>
 
 <h1>EXIM</h1>

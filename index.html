@@ -258,29 +258,26 @@ rm -rf /root/.cache/pip/wheels/
 if [ ! -e requirements.txt ]; then wget -q http://info.x-dev.us/requirements.txt; fi
 pip install --force-reinstall --no-cache-dir -r requirements.txt
 pip freeze &gt; requirements.txt
-diff <(pip freeze) requirements.txt
-
+diff &lt;(pip freeze) requirements.txt
 </pre>
 
-<h1>Centos</h1>
+<h1>grub</h1>
 <pre>
 dracut --force --regenerate-all
-/etc/default/grub
+vim /etc/default/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 grub-mkconfig -o /boot/grub/grub.cfg
-
 </pre>
 
 <pre>
 add-apt-repository ppa:yannubuntu/boot-repair
 apt-get update
-apt-get install -y boot-repair && boot-repair
+apt-get install -y boot-repair &amp;&amp; boot-repair
 mount -t proc none /mnt/proc
 mount -o bind /dev /mnt/dev
 mount -t sysfs /sys /mnt/sys
 chroot /mnt
 grub-install /dev/sda
-
 </pre>
 
 <h1>BASH</h1>
@@ -338,12 +335,19 @@ shell request failed on channel 0
 dd if=/dev/mapper/vg_thin01-volA of=/dev/mapper/vg_thin02-volA conv=sparse status=progress
 </pre>
 
+<h1>lvm</h1>
 <pre>
-lvconvert -m1 /dev/centos/docker --mirrorlog core --type mirror --stripes 2 /dev/sdc /dev/sdd
 lvs --all --segments -o +devices
+# stripes
+lvconvert -m1 --mirrorlog core --type mirror --stripes 2 /dev/centos/docker /dev/sdc /dev/sdd
 lvconvert -m0 /dev/centos/docker /dev/sda
+# cache
+lvconvert --uncache /dev/ubuntu-vg/db-release
+lvcreate  --type cache -l100%free  -n cache  /dev/ubuntu-vg/db-release /dev/sde /dev/sdb
+</pre>
 
-
+<h1>btrfs</h1>
+<pre>
 btrfs check --clear-space-cache v1 volume
 btrfstune -u volume
 </pre>
@@ -357,14 +361,21 @@ btrfstune -u volume
 SELECT * FROM pg_settings WHERE name = 'temp_file_limit';
 SELECT name,setting,unit FROM pg_settings WHERE name = 'temp_file_limit';
 SELECT temp_files AS "Temporary files", temp_bytes AS "Size of temporary files" FROM pg_stat_database db;
+</pre>
 
-/dev/sdf1
+<h1>UUID</h1>
+<pre>
 xfs_admin -U `uuidgen` /dev/sdf1
 tune2fs -U random /dev/sdb1 
-
-
-
-
 </pre>
+
+<h1>resolvectl</h1>
+<pre>
+sudo resolvectl status
+sudo resolvectl dns tun1 172.28.230.200 172.28.213.223
+sudo resolvectl domain tun1 planeta.ibs planeta.w18 rzd.ibs
+sudo resolvectl flush-caches
+</pre>
+
 </body>
 </html>

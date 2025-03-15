@@ -61,8 +61,8 @@ process_remote_file() {
         if ! cmp -s ~/"$local_script_name" "$temp_file"; then
             # Если файлы различаются, переименовываем временный файл
             local new_temp_file
-            new_temp_file=$(create_temp_file)
-            mv "$temp_file" "$new_temp_file$local_script_name"
+            new_temp_file="$(create_temp_file)$local_script_name"
+            mv "$temp_file" "$new_temp_file"
             echo "vimdiff $new_temp_file ~/$local_script_name"
         else
             # Если файлы идентичны, выводим сообщение о совпадении

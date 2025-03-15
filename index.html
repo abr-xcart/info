@@ -148,7 +148,7 @@ service iptables-persistent save
 aptitude install ipset iptables-persistent
 export SET=qtm
 ipset create $SET hash:net
-for x in $(curl http://info.x-dev.us/qtmsoft-ips.txt); do ipset add $SET $x; done
+for x in $(curl http://info.x-dev.us/x-cart/qtmsoft-ips.txt); do ipset add $SET $x; done
 iptables -A INPUT -m set --match-set $SET src -p tcp -m multiport --dports 1022 -j ACCEPT
 service iptables-persistent save
 </pre>

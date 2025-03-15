@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Глобальная переменная для базового URL
+X_DEV_URL="https://info.x-dev.us/x-dev-remote-setup/"
+
+# Локальная переменная для имени скрипта
+X_DEV_SCRIPT="/bash_aliases"
+
 # Функция для вывода ошибки и завершения скрипта
 _exit_err() {
   local CODE=$1
@@ -30,8 +36,11 @@ temp_file=$(create_temp_file)
 # Устанавливаем ловушку для автоматического удаления временного файла при завершении скрипта
 trap 'rm -f "$temp_file"' EXIT
 
+# Формируем полный URL для скачивания
+FULL_URL="${X_DEV_URL}${X_DEV_SCRIPT}"
+
 # Скачиваем удаленный файл с помощью curl
-if ! curl -sSL --fail --show-error -o "$temp_file" "https://info.x-dev.us/x-dev-remote-setup/bash_aliases"; then
+if ! curl -sSL --fail --show-error -o "$temp_file" "$FULL_URL"; then
     _exit_err 1 "Не удалось скачать файл."
 fi
 

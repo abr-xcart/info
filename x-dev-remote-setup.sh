@@ -59,12 +59,13 @@ process_remote_file() {
     if [ -e ~/"$local_script_name" ]; then
         # Сравниваем содержимое файлов
         if ! cmp -s ~/"$local_script_name" "$temp_file"; then
-            # Если файлы различаются, открываем vimdiff
+            # Если файлы различаются, открываем vimdiff в интерактивном режиме
+            export TERM=xterm-256color
+            #vimdiff ~/"$local_script_name" "$temp_file" < /dev/tty > /dev/tty
             vimdiff ~/"$local_script_name" "$temp_file"
         else
-            # Если файлы идентичны, выводим сообщение и завершаем скрипт
+            # Если файлы идентичны, выводим сообщение
             echo "Файлы идентичны. Временный файл будет удален."
-            _exit_err 0 ""
         fi
     else
         # Если оригинальный файл не существует, перемещаем временный файл на его место
@@ -73,15 +74,17 @@ process_remote_file() {
     fi
 }
 
-# Создаем временный файл
+# Список удаленных файлов
+REMOTE_SCRIPT_NAMES=("dot_vimrc" "dot_bash_aliases")
+
+# Создаем один временный файл для всех элементов списка
 temp_file=$(create_temp_file)
 
 # Устанавливаем ловушку для автоматического удаления временного файла при завершении скрипта
 trap 'rm -f "$temp_file"' EXIT
 
-# Имя удаленного файла
-REMOTE_SCRIPT_NAME="dot_bash_aliases"
-
-# Обрабатываем удаленный файл
-process_remote_file "$temp_file" dot_vimrc
-process_remote_file "$temp_file" dot_bash_aliases
+# Обрабатываем каждый файл из списка
+for remote_script_name in "${REMOTE_SCRIPT_NAMES[@]}"; do
+    # Обрабатываем удаленный файл
+    process_remote_file "$temp_file" "$remote_script_name"
+done

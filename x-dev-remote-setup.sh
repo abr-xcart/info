@@ -41,6 +41,23 @@ process_remote_file() {
     if ! curl -sSL --fail --show-error -o "$temp_file" "$FULL_URL"; then
         _exit_err 1 "Не удалось скачать файл."
     fi
+
+    # Проверяем, существует ли оригинальный файл
+    if [ -e ~/.bash_aliases ]; then
+        # Сравниваем содержимое файлов
+        if ! cmp -s ~/.bash_aliases "$temp_file"; then
+            # Если файлы различаются, открываем vimdiff
+            vimdiff ~/.bash_aliases "$temp_file"
+        else
+            # Если файлы идентичны, выводим сообщение и завершаем скрипт
+            echo "Файлы идентичны. Временный файл будет удален."
+            _exit_err 0 ""
+        fi
+    else
+        # Если оригинальный файл не существует, перемещаем временный файл на его место
+        mv "$temp_file" ~/.bash_aliases
+        echo "Файл ~/.bash_aliases создан."
+    fi
 }
 
 # Создаем временный файл
@@ -51,20 +68,3 @@ trap 'rm -f "$temp_file"' EXIT
 
 # Обрабатываем удаленный файл
 process_remote_file "$temp_file"
-
-# Проверяем, существует ли оригинальный файл
-if [ -e ~/.bash_aliases ]; then
-    # Сравниваем содержимое файлов
-    if ! cmp -s ~/.bash_aliases "$temp_file"; then
-        # Если файлы различаются, открываем vimdiff
-        vimdiff ~/.bash_aliases "$temp_file"
-    else
-        # Если файлы идентичны, выводим сообщение и завершаем скрипт
-        echo "Файлы идентичны. Временный файл будет удален."
-        _exit_err 0 ""
-    fi
-else
-    # Если оригинальный файл не существует, перемещаем временный файл на его место
-    mv "$temp_file" ~/.bash_aliases
-    echo "Файл ~/.bash_aliases создан."
-fi

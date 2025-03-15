@@ -3,9 +3,6 @@
 # Глобальная переменная для базового URL
 X_DEV_URL="https://info.x-dev.us/x-dev-remote-setup"
 
-# Локальная переменная для имени файла (без путей)
-X_DEV_SCRIPT="bash_aliases"
-
 # Функция для вывода ошибки и завершения скрипта
 _exit_err() {
   local CODE=$1
@@ -33,9 +30,10 @@ create_temp_file() {
 # Функция для обработки удаленного файла
 process_remote_file() {
     local temp_file=$1
+    local script_name=$2  # Второй параметр — имя файла
 
     # Формируем полный URL для скачивания
-    local FULL_URL="${X_DEV_URL}/${X_DEV_SCRIPT}"
+    local FULL_URL="${X_DEV_URL}/${script_name}"
 
     # Скачиваем удаленный файл с помощью curl
     if ! curl -sSL --fail --show-error -o "$temp_file" "$FULL_URL"; then
@@ -66,5 +64,8 @@ temp_file=$(create_temp_file)
 # Устанавливаем ловушку для автоматического удаления временного файла при завершении скрипта
 trap 'rm -f "$temp_file"' EXIT
 
+# Имя файла для скачивания
+SCRIPT_NAME="bash_aliases"
+
 # Обрабатываем удаленный файл
-process_remote_file "$temp_file"
+process_remote_file "$temp_file" "$SCRIPT_NAME"

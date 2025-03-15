@@ -89,6 +89,27 @@ printf ":g/qt_debug/d\n:x\n" | ex FILE
 git init --separate-git-dir=
 git ci -m INIT --allow-empty
 
+# General Git config
+git config --global user.name "Yuriy Abramov"
+git config --global user.email "YAbramov@ibs.ru"
+git config --global color.ui true
+git config --global color.status always
+git config --global color.diff always
+git config --global diff.tool vimdiff
+git config --global difftool.prompt false
+git config --global difftool.vimdiff.cmd 'vim -f -d -c "wincmd l" -c '\''cd "$GIT_PREFIX"'\'' "$LOCAL" "$REMOTE"'
+git config --global mergetool.prompt false
+git config --global merge.tool vimdiff
+git config --global alias.d difftool
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.b branch
+git config --global alias.m mergetool
+git config --global pager.branch false
+
+git config --global core.editor "vim"
+git config --global core.pager 'less -R'
+
 </pre>
 
 <a href="https://docs.google.com/document/d/1kiHvoNl7G-O4VxjGpV2egTAb8_VQXV-q1mARJLEsFco/edit#">https://docs.google.com/document/d/1kiHvoNl7G-O4VxjGpV2egTAb8_VQXV-q1mARJLEsFco/edit#</a>
@@ -109,25 +130,6 @@ EOL
 echo "AcceptEnv GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL" &gt;&gt; /etc/ssh/sshd_config
 sudo sshd -t && service sshd reload
 
-# General Git config
-git config --global user.name "Yuriy Abramov"
-git config --global user.email "YAbramov@ibs.ru"
-git config --global color.ui true
-git config --global color.status always
-git config --global color.diff always
-git config --global diff.tool vimdiff
-git config --global difftool.prompt false
-git config --global difftool.vimdiff.cmd 'vim -f -d -c "wincmd l" -c '\''cd "$GIT_PREFIX"'\'' "$LOCAL" "$REMOTE"'
-git config --global mergetool.prompt false
-git config --global merge.tool vimdiff
-git config --global alias.d difftool
-git config --global alias.co checkout
-git config --global alias.ci commit
-git config --global alias.b branch
-git config --global alias.m mergetool
-git config --global pager.branch false
-
-git config --global core.pager 'less -R'
 </pre>
 <pre>
 visudo

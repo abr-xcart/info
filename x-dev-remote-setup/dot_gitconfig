@@ -1,0 +1,25 @@
+[color]
+        ui = true
+        status = always
+        diff = always
+[diff]
+        tool = vimdiff
+[difftool]
+        prompt = false
+[difftool "vimdiff"]
+        cmd = vim -f -d -c \"wincmd l\" -c 'cd \"$GIT_PREFIX\"' \"$LOCAL\" \"$REMOTE\"
+[mergetool]
+        prompt = false
+[merge]
+        tool = vimdiff
+[alias]
+        d = difftool
+        co = checkout
+        ci = commit
+        b = branch
+        m = mergetool
+[pager]
+        branch = false
+[user]
+        name = Yuriy Abramov
+        email = YAbramov@ibs.ru

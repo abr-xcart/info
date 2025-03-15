@@ -1,9 +1,8 @@
-<!--
-vim: paste hls
--->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>tools</title>
+    <meta charset="UTF-8">
+    <title>tools</title>
 </head>
 <body>
 
@@ -14,7 +13,6 @@ curl -sSL --fail --show-error https://info.x-dev.us/x-dev-remote-setup.sh | bash
 
 <h1>IBS</h1>
 <pre>
-
 update-ca-certificates
 
 /etc/ssl/certs/ca-certificates.crt
@@ -58,9 +56,6 @@ wget -O $HOME/.vim/plugin/gnupg.vim "http://www.vim.org/scripts/download_script.
 
 <h1>GREP</h1>
 <pre>
-update-alternatives --config editor
-update-alternatives --config vi
-
 cat &lt;&lt; EOL &gt;&gt; /etc/bashrc
 export EDITOR=`which vim`
 export VISUAL=\$EDITOR
@@ -71,6 +66,17 @@ alias vi=\$EDITOR
 
 EOL
 
+yum install -y sensible-utils
+yum install -y debconf-utils
+yum install -y dialog
+
+update-alternatives --config editor
+update-alternatives --config vi
+
+alternatives --display editor
+alternatives --config editor
+alternatives --install /usr/bin/editor editor /usr/bin/vim 10
+alternatives --remove editor /bin/nano
 
 export EXCLUDES=$(for e in so bin exe dll cur cpp pl orig lst ico jpeg JPG jpg png tif gif iso flv wmv swf MPG mpg mp3 zip tar rar gz tgz bz2 pdf sql; do echo -n " --exclude=\*.$e "; done)
 alias grep="grep --color=auto $EXCLUDES"
@@ -110,20 +116,20 @@ git config --global core.pager 'less -R'
 <a href="https://docs.google.com/document/d/1kiHvoNl7G-O4VxjGpV2egTAb8_VQXV-q1mARJLEsFco/edit#">https://docs.google.com/document/d/1kiHvoNl7G-O4VxjGpV2egTAb8_VQXV-q1mARJLEsFco/edit#</a>
 <pre>
 # Setup Client Env Vars for Git
-cat << EOL &gt;&gt; $HOME/.ssh/config
+cat &lt;&lt; EOL &gt;&gt; $HOME/.ssh/config
 Host *
 SendEnv GIT_AUTHOR_NAME
 SendEnv GIT_AUTHOR_EMAIL
 EOL
 
-cat << EOL &gt;&gt; $HOME/.bashrc
+cat &lt;&lt; EOL &gt;&gt; $HOME/.bashrc
 export GIT_AUTHOR_NAME="Yuriy Abramov"
 export GIT_AUTHOR_EMAIL="YAbramov@ibs.ru"
 EOL
 
 # Setup Server Env Vars for Git
 echo "AcceptEnv GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL" &gt;&gt; /etc/ssh/sshd_config
-sudo sshd -t && service sshd reload
+sudo sshd -t &amp;&amp; service sshd reload
 
 </pre>
 <pre>
@@ -131,8 +137,9 @@ visudo
 Defaults env_keep += SSH_AUTH_SOCK
 </pre>
 
-https://support.cloudflare.com/hc/en-us/articles/200169166-How-do-I-whitelist-CloudFlare-s-IP-addresses-in-iptables-
+<p>https://support.cloudflare.com/hc/en-us/articles/200169166-How-do-I-whitelist-CloudFlare-s-IP-addresses-in-iptables-</p>
 
+<pre>
 service iptables-persistent save
 aptitude install ipset iptables-persistent
 export SET=qtm
@@ -140,6 +147,7 @@ ipset create $SET hash:net
 for x in $(curl http://info.x-dev.us/qtmsoft-ips.txt); do ipset add $SET $x; done
 iptables -A INPUT -m set --match-set $SET src -p tcp -m multiport --dports 1022 -j ACCEPT
 service iptables-persistent save
+</pre>
 
 <h1>grub</h1>
 <pre>

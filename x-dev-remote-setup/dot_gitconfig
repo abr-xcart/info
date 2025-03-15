@@ -23,3 +23,5 @@
 [user]
         name = Yuriy Abramov
         email = YAbramov@ibs.ru
+[pull]
+        ff = only

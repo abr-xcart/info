@@ -1,3 +1,14 @@
-set modeline
+set background=light
+set cursorline
+set et
+set foldlevelstart=10
 set hls
+set modeline
+set noautoindent
+set nobackup
+set nowritebackup
 set paste
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set wrap

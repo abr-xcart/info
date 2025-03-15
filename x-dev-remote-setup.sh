@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Глобальная переменная для базового URL
-X_DEV_URL="https://info.x-dev.us/x-dev-remote-setup/"
+X_DEV_URL="https://info.x-dev.us/x-dev-remote-setup"
 
-# Локальная переменная для имени скрипта
-X_DEV_SCRIPT="/bash_aliases"
+# Локальная переменная для имени файла (без путей)
+X_DEV_SCRIPT="bash_aliases"
 
 # Функция для вывода ошибки и завершения скрипта
 _exit_err() {
@@ -35,7 +35,7 @@ process_remote_file() {
     local temp_file=$1
 
     # Формируем полный URL для скачивания
-    local FULL_URL="${X_DEV_URL}${X_DEV_SCRIPT}"
+    local FULL_URL="${X_DEV_URL}/${X_DEV_SCRIPT}"
 
     # Скачиваем удаленный файл с помощью curl
     if ! curl -sSL --fail --show-error -o "$temp_file" "$FULL_URL"; then

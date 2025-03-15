@@ -1,6 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>LAMP Tools</title>
+    <meta charset="UTF-8">
+    <title>LAMP Tools</title>
 </head>
 <body>
 
@@ -31,10 +33,10 @@ https://documentation.cpanel.net/display/68Docs/Configuration+Values+of+PHP-FPM
 find /var/cpanel/userdata -name "*.php-fpm.yaml"
 
 
-/var/cpanel/userdata/<user>/<domain.com>.php-fpm.yaml
+/var/cpanel/userdata/&lt;user&gt;/&lt;domain.com&gt;.php-fpm.yaml
 php_admin_value_sendmail_path: {
   name: 'php_admin_value[sendmail_path]',
-  value: '/usr/sbin/sendmail -t -i <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c4e9a2b7a5a8a1b784a0aba9a5adaaeaa7aba9">[email&#160;protected]</a>'
+  value: '/usr/sbin/sendmail -t -i &lt;a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c4e9a2b7a5a8a1b784a0aba9a5adaaeaa7aba9"&gt;[email&#160;protected]&lt;/a&gt;'
 }
 request_terminate_timeout: 120
 pm_max_requests: 1000
@@ -81,3 +83,7 @@ accept
   hosts = *
   logwrite = "Sender rate overlimit - $sender_host_address , but whitelisted..."
   delay = 3s
+</pre>
+
+</body>
+</html>

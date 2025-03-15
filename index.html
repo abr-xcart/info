@@ -33,12 +33,6 @@ yes | docker image prune -a
 docker images | tail -n +2 | perl -pe 's#(.*?)\s+(.*?)\s+(.*?)\s+.*#echo "\# $1:$2" &gt; $3.json ;docker inspect $3 &gt;&gt; $3.json #' | sh
 </pre>
 
-<h1>MySQL</h1>
-<pre>
-wget http://www.day32.com/MySQL/tuning-primer.sh
-wget https://raw.githubusercontent.com/rackerhacker/MySQLTuner-perl/master/mysqltuner.pl
-</pre>
-
 <h1>VIM</h1>
 <pre>
 :set wrap
@@ -47,11 +41,6 @@ wget https://raw.githubusercontent.com/rackerhacker/MySQLTuner-perl/master/mysql
 
 :s@^--- xcart/\([^\t]\+\)\t@Index: \1\r\0@g
 :,/^Index:/-1d
-</pre>
-<h1>SQL PARSER</h1>
-<pre>
-:s/\(SELECT\|FROM\|INNER JOIN\|LEFT JOIN\|GROUP BY\|WHERE\|JOIN\|ORDER BY\|HAVING\|LIMIT\) /\r\1 \r\t/gi
-:s/\(SELECT\( DISTINCT\)\?\|FROM\|INNER JOIN\|LEFT JOIN\|GROUP BY\|WHERE\|JOIN\|ORDER BY\|HAVING\|LIMIT\) /\r\1 \r\t/gi
 </pre>
 
 <h1>gnupg.vim</h1>
@@ -145,114 +134,6 @@ ipset create $SET hash:net
 for x in $(curl http://info.x-dev.us/qtmsoft-ips.txt); do ipset add $SET $x; done
 iptables -A INPUT -m set --match-set $SET src -p tcp -m multiport --dports 1022 -j ACCEPT
 service iptables-persistent save
-
-<h1>WHM FPM</h1>
-<pre>
-http://www.host.com:2086/scripts/command?PFILE=Service_Configuration
-Service Configuration -&gt; Apache Configuration -&gt; Include Editor -&gt; Pre VirtualHost Include -&gt; All Versions -&gt; pre_virtualhost_global.conf
-
-https://documentation.cpanel.net/display/68Docs/Configuration+Values+of+PHP-FPM
-
-# /scripts/php_fpm_config --rebuild
-# /scripts/restartsrv_apache_php_fpm
-
-/var/cpanel/ApachePHPFPM/system_pool_defaults.yaml
-
-find /var/cpanel/userdata -name "*.php-fpm.yaml"
-
-
-/var/cpanel/userdata/<user>/<domain.com>.php-fpm.yaml
-php_admin_value_sendmail_path: {
-  name: 'php_admin_value[sendmail_path]',
-  value: '/usr/sbin/sendmail -t -i -fsales@domain.com'
-}
-request_terminate_timeout: 120
-pm_max_requests: 1000
-request_slowlog_timeout: 3
-slowlog: "var/log/php-fpm/$pool-slow.log"
-
-access_log: {
-    name: "access.log",
-    value: "var/log/php-fpm/$pool-access.log"
-}
-
-
-access_format: {
-    name: "access.format",
-    value: '"%R – %u %t \"%m %r%Q%q\" %s %f %{seconds}d %{kilo}M %C%%"'
-}
-
-find /opt/cpanel/ea-php*/root/etc/php-fpm.d/ -name "*.conf" -print -exec grep --color exec "{}" \;
-find /opt/cpanel/ea-php*/root/usr/var/log/php-fpm/*slow*
-find /opt/cpanel/ea-php*/root/usr/var/log/php-fpm/*access*
-</pre>
-
-<pre>
-/usr/local/cpanel/scripts/install_lets_encrypt_autossl_provider
-
-DKIM
-/usr/local/cpanel/bin/dkim_keys_install system
-/var/cpanel/domain_keys/public
-</pre>
-
-<h1>EXIM</h1>
-<pre>
-Exim Configuration Manager
-
-Require remote (hostname/IP address) HELO
-
-Sender Verification Callouts = On
-Send generic recipient failure messages = Off
-Allow DKIM verification for incoming messages = On
-
-custom_end_outgoing_smtp_checkall
-
-accept
-  hosts = *
-  logwrite = "Sender rate overlimit - $sender_host_address , but whitelisted..."
-  delay = 3s
-
-
-
-Section: TRANSPORTSTART
-remote_smtp_smart_dkim:
-  driver = smtp
-  hosts_require_tls = $host_address
-  hosts_require_auth = $host_address
-#  dkim_domain = $sender_address_domain
-#  dkim_selector = default
-#  dkim_private_key = "/var/cpanel/domain_keys/private/${dkim_domain}"
-#  dkim_canon = relaxed
-
-
-Section: ROUTERSTART
-send_via_google:
-  driver = manualroute
-  domains = !+local_domains
-  require_files = "+/var/cpanel/domain_keys/private/${sender_address_domain}"
-#  transport = remote_smtp_smart_dkim
-  transport = gmail_smtp
-  route_list = $domain smtp.gmail.com::587
-  senders = ^user@domain.com
-
-Section: AUTH
-manage_login:
-  driver = plaintext
-  public_name = PLAIN
-  client_send = ^user@domain.com^pass
-
-</pre>
-
-<h1>ICINGA2</h1>
-<pre>
-cd /opt/cdev/venvs/icinga/bin
-. ./activate
-rm -rf /root/.cache/pip/wheels/
-if [ ! -e requirements.txt ]; then wget -q http://info.x-dev.us/requirements.txt; fi
-pip install --force-reinstall --no-cache-dir -r requirements.txt
-pip freeze &gt; requirements.txt
-diff &lt;(pip freeze) requirements.txt
-</pre>
 
 <h1>grub</h1>
 <pre>

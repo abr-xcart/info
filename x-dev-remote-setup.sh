@@ -62,7 +62,7 @@ process_remote_file() {
             # Если файлы различаются, переименовываем временный файл
             local new_temp_file
             new_temp_file=$(create_temp_file)
-            mv "$temp_file" "$new_temp_file"
+            mv "$temp_file" "$new_temp_file$local_script_name"
             echo "vimdiff $new_temp_file ~/$local_script_name"
         else
             # Если файлы идентичны, выводим сообщение о совпадении

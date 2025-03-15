@@ -1,24 +1,107 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>X-Cart tools</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-Cart and LAMP Tools</title>
 </head>
 <body>
-<h1>Support.php</h1>
-<pre>
+    <h1>Support.php</h1>
+    <pre>
 wget http://support.x-dev.us/support.php
 wget https://www.dropbox.com/s/oqkkv9vuwpjgs2t/support.php
-</pre>
+    </pre>
 
-<h1>Patches</h1>
-http://help.x-cart.com/images/1/1a/MYSQL5_comp_for_4.0.x.txt
-<pre>
-<h1>personal demo</h1>
-<pre>
+    <h1>Patches</h1>
+    <p>
+        <a href="http://help.x-cart.com/images/1/1a/MYSQL5_comp_for_4.0.x.txt">MYSQL5_comp_for_4.0.x.txt</a>
+    </p>
 
-начиная с  5.3.3.3 процедура удаления  модуля  Trial  следующая
-- в etc/config.php в секцию [performance] добавить ignore_system_modules = On
-- сделать ребилд кеша в магазине
-- на странице My addons найти модуль Trial и удалить его
-</pre>
+    <h1>Personal Demo</h1>
+    <pre>
+Начиная с 5.3.3.3 процедура удаления модуля Trial следующая:
+- В etc/config.php в секцию [performance] добавить ignore_system_modules = On
+- Сделать ребилд кеша в магазине
+- На странице My addons найти модуль Trial и удалить его
+    </pre>
+
+    <h1>MySQL</h1>
+    <pre>
+wget http://www.day32.com/MySQL/tuning-primer.sh
+wget https://raw.githubusercontent.com/rackerhacker/MySQLTuner-perl/master/mysqltuner.pl
+    </pre>
+
+    <h1>SQL PARSER</h1>
+    <pre>
+:s/\(SELECT\|FROM\|INNER JOIN\|LEFT JOIN\|GROUP BY\|WHERE\|JOIN\|ORDER BY\|HAVING\|LIMIT\) /\r\1 \r\t/gi
+:s/\(SELECT\( DISTINCT\)\?\|FROM\|INNER JOIN\|LEFT JOIN\|GROUP BY\|WHERE\|JOIN\|ORDER BY\|HAVING\|LIMIT\) /\r\1 \r\t/gi
+    </pre>
+
+    <h1>WHM FPM</h1>
+    <pre>
+http://www.host.com:2086/scripts/command?PFILE=Service_Configuration
+Service Configuration -&gt; Apache Configuration -&gt; Include Editor -&gt; Pre VirtualHost Include -&gt; All Versions -&gt; pre_virtualhost_global.conf
+
+https://documentation.cpanel.net/display/68Docs/Configuration+Values+of+PHP-FPM
+
+# /scripts/php_fpm_config --rebuild
+# /scripts/restartsrv_apache_php_fpm
+
+/var/cpanel/ApachePHPFPM/system_pool_defaults.yaml
+
+find /var/cpanel/userdata -name "*.php-fpm.yaml"
+
+
+/var/cpanel/userdata/&lt;user&gt;/&lt;domain.com&gt;.php-fpm.yaml
+php_admin_value_sendmail_path: {
+  name: 'php_admin_value[sendmail_path]',
+  value: '/usr/sbin/sendmail -t -i -fsales@domain.com'
+}
+request_terminate_timeout: 120
+pm_max_requests: 1000
+request_slowlog_timeout: 3
+slowlog: "var/log/php-fpm/$pool-slow.log"
+
+access_log: {
+    name: "access.log",
+    value: "var/log/php-fpm/$pool-access.log"
+}
+
+
+access_format: {
+    name: "access.format",
+    value: '"%R – %u %t \"%m %r%Q%q\" %s %f %{seconds}d %{kilo}M %C%%"'
+}
+
+find /opt/cpanel/ea-php*/root/etc/php-fpm.d/ -name "*.conf" -print -exec grep --color exec "{}" \;
+find /opt/cpanel/ea-php*/root/usr/var/log/php-fpm/*slow*
+find /opt/cpanel/ea-php*/root/usr/var/log/php-fpm/*access*
+    </pre>
+
+    <pre>
+/usr/local/cpanel/scripts/install_lets_encrypt_autossl_provider
+
+DKIM
+/usr/local/cpanel/bin/dkim_keys_install system
+/var/cpanel/domain_keys/public
+    </pre>
+
+    <h1>EXIM</h1>
+    <pre>
+Exim Configuration Manager
+
+Require remote (hostname/IP address) HELO
+
+Sender Verification Callouts = On
+Send generic recipient failure messages = Off
+Allow DKIM verification for incoming messages = On
+
+custom_end_outgoing_smtp_checkall
+
+accept
+  hosts = *
+  logwrite = "Sender rate overlimit - $sender_host_address , but whitelisted..."
+  delay = 3s
+    </pre>
 </body>
 </html>

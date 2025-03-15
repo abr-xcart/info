@@ -30,19 +30,27 @@ create_temp_file() {
     fi
 }
 
+# Функция для обработки удаленного файла
+process_remote_file() {
+    local temp_file=$1
+
+    # Формируем полный URL для скачивания
+    local FULL_URL="${X_DEV_URL}${X_DEV_SCRIPT}"
+
+    # Скачиваем удаленный файл с помощью curl
+    if ! curl -sSL --fail --show-error -o "$temp_file" "$FULL_URL"; then
+        _exit_err 1 "Не удалось скачать файл."
+    fi
+}
+
 # Создаем временный файл
 temp_file=$(create_temp_file)
 
 # Устанавливаем ловушку для автоматического удаления временного файла при завершении скрипта
 trap 'rm -f "$temp_file"' EXIT
 
-# Формируем полный URL для скачивания
-FULL_URL="${X_DEV_URL}${X_DEV_SCRIPT}"
-
-# Скачиваем удаленный файл с помощью curl
-if ! curl -sSL --fail --show-error -o "$temp_file" "$FULL_URL"; then
-    _exit_err 1 "Не удалось скачать файл."
-fi
+# Обрабатываем удаленный файл
+process_remote_file "$temp_file"
 
 # Проверяем, существует ли оригинальный файл
 if [ -e ~/.bash_aliases ]; then

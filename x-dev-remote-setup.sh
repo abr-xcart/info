@@ -27,13 +27,28 @@ create_temp_file() {
     fi
 }
 
+# Функция для преобразования remote_script_name в local_script_name
+get_local_script_name() {
+    local remote_script_name=$1
+    # Заменяем "dot_" на "." только если оно находится в начале строки
+    if [[ "$remote_script_name" == dot_* ]]; then
+        echo "${remote_script_name/dot_/.}"
+    else
+        echo "$remote_script_name"
+    fi
+}
+
 # Функция для обработки удаленного файла
 process_remote_file() {
     local temp_file=$1
-    local script_name=$2  # Второй параметр — имя файла
+    local remote_script_name=$2  # Второй параметр — имя удаленного файла
+
+    # Вычисляем local_script_name
+    local local_script_name
+    local_script_name=$(get_local_script_name "$remote_script_name")
 
     # Формируем полный URL для скачивания
-    local FULL_URL="${X_DEV_URL}/${script_name}"
+    local FULL_URL="${X_DEV_URL}/${remote_script_name}"
 
     # Скачиваем удаленный файл с помощью curl
     if ! curl -sSL --fail --show-error -o "$temp_file" "$FULL_URL"; then
@@ -41,11 +56,11 @@ process_remote_file() {
     fi
 
     # Проверяем, существует ли оригинальный файл
-    if [ -e ~/.bash_aliases ]; then
+    if [ -e ~/"$local_script_name" ]; then
         # Сравниваем содержимое файлов
-        if ! cmp -s ~/.bash_aliases "$temp_file"; then
+        if ! cmp -s ~/"$local_script_name" "$temp_file"; then
             # Если файлы различаются, открываем vimdiff
-            vimdiff ~/.bash_aliases "$temp_file"
+            vimdiff ~/"$local_script_name" "$temp_file"
         else
             # Если файлы идентичны, выводим сообщение и завершаем скрипт
             echo "Файлы идентичны. Временный файл будет удален."
@@ -53,8 +68,8 @@ process_remote_file() {
         fi
     else
         # Если оригинальный файл не существует, перемещаем временный файл на его место
-        mv "$temp_file" ~/.bash_aliases
-        echo "Файл ~/.bash_aliases создан."
+        mv "$temp_file" ~/"$local_script_name"
+        echo "Файл ~/$local_script_name создан."
     fi
 }
 
@@ -64,8 +79,9 @@ temp_file=$(create_temp_file)
 # Устанавливаем ловушку для автоматического удаления временного файла при завершении скрипта
 trap 'rm -f "$temp_file"' EXIT
 
-# Имя файла для скачивания
-SCRIPT_NAME="bash_aliases"
+# Имя удаленного файла
+REMOTE_SCRIPT_NAME="dot_bash_aliases"
 
 # Обрабатываем удаленный файл
-process_remote_file "$temp_file" "$SCRIPT_NAME"
+process_remote_file "$temp_file" dot_vimrc
+process_remote_file "$temp_file" dot_bash_aliases

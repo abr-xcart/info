@@ -4,6 +4,7 @@ set et
 set foldlevelstart=10
 set hls
 set modeline
+set mouse=
 set noautoindent
 set nobackup
 set nowritebackup
@@ -12,3 +13,4 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set wrap
+syntax on

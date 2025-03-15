@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Функция для вывода ошибки и завершения скрипта
+_exit_err() {
+  local CODE=$1
+  local MESSAGE=$2
+  if [ -n "$MESSAGE" ]; then
+    echo "ERROR $CODE: $MESSAGE" >&2
+  fi
+  exit "$CODE"
+}
+
 # Функция для создания временного файла
 create_temp_file() {
     if command -v mktemp >/dev/null 2>&1; then
@@ -20,10 +30,9 @@ temp_file=$(create_temp_file)
 # Устанавливаем ловушку для автоматического удаления временного файла при завершении скрипта
 trap 'rm -f "$temp_file"' EXIT
 
-# Скачиваем удаленный файл во временный файл
-if ! wget -O "$temp_file" https://info.x-dev.us/x-dev-remote-sertup/bash_aliases; then
-    echo "Ошибка: не удалось скачать файл." >&2
-    exit 1
+# Скачиваем удаленный файл с помощью curl
+if ! curl -sSL --fail --show-error -o "$temp_file" "https://info.x-dev.us/x-dev-remote-setup/bash_aliases"; then
+    _exit_err 1 "Не удалось скачать файл."
 fi
 
 # Проверяем, существует ли оригинальный файл
@@ -35,7 +44,7 @@ if [ -e ~/.bash_aliases ]; then
     else
         # Если файлы идентичны, выводим сообщение и завершаем скрипт
         echo "Файлы идентичны. Временный файл будет удален."
-        exit 0
+        _exit_err 0 ""
     fi
 else
     # Если оригинальный файл не существует, перемещаем временный файл на его место

@@ -1,7 +1,21 @@
 #!/bin/bash
 
+# Функция для создания временного файла
+create_temp_file() {
+    if command -v mktemp >/dev/null 2>&1; then
+        # Используем mktemp, если он доступен
+        mktemp
+    else
+        # Альтернатива для систем, где mktemp отсутствует
+        temp_dir="${TMPDIR:-/tmp}"
+        temp_file="${temp_dir}/tempfile.$$.$(date +%s)"
+        touch "$temp_file"
+        echo "$temp_file"
+    fi
+}
+
 # Создаем временный файл
-temp_file=$(mktemp)
+temp_file=$(create_temp_file)
 
 # Устанавливаем ловушку для автоматического удаления временного файла при завершении скрипта
 trap 'rm -f "$temp_file"' EXIT

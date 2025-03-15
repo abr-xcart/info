@@ -59,13 +59,14 @@ process_remote_file() {
     if [ -e ~/"$local_script_name" ]; then
         # Сравниваем содержимое файлов
         if ! cmp -s ~/"$local_script_name" "$temp_file"; then
-            # Если файлы различаются, открываем vimdiff в интерактивном режиме
-            export TERM=xterm-256color
-            #vimdiff ~/"$local_script_name" "$temp_file" < /dev/tty > /dev/tty
-            vimdiff ~/"$local_script_name" "$temp_file"
+            # Если файлы различаются, переименовываем временный файл
+            local new_temp_file
+            new_temp_file=$(create_temp_file)
+            mv "$temp_file" "$new_temp_file"
+            echo "vimdiff $new_temp_file ~/$local_script_name"
         else
-            # Если файлы идентичны, выводим сообщение
-            echo "Файлы идентичны. Временный файл будет удален."
+            # Если файлы идентичны, выводим сообщение о совпадении
+            echo "Файл ~/$local_script_name совпадает с удаленным."
         fi
     else
         # Если оригинальный файл не существует, перемещаем временный файл на его место

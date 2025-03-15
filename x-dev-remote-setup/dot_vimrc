@@ -1,1 +1,3 @@
 set modeline
+set hls
+set paste

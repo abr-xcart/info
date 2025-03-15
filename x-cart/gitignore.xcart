@@ -1,3 +1,4 @@
+# wget https://info.x-dev.us/x-cart/gitignore.xcart -O .gitignore
 # git add .gitignore
 # git add *.php modules/ include/ payment/ mail/ admin provider/ customer/ partner/ shipping/ sql/ var/ catalog/ images/ robots*.txt *.html .htaccess
 # git add CHANGELOG COPYRIGHT NEW-* README VERSION CHANGELOG* COPYRIGHT INSTALL.* VERSION.*

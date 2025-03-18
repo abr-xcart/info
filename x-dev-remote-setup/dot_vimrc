@@ -1,4 +1,3 @@
-set background=light
 set cursorline
 set et
 set foldlevelstart=10

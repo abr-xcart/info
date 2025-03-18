@@ -76,7 +76,7 @@ process_remote_file() {
 }
 
 # Список удаленных файлов
-REMOTE_SCRIPT_NAMES=("dot_vimrc" "dot_bash_aliases" "dot_gitconfig" "dot_selected_editor")
+REMOTE_SCRIPT_NAMES=("dot_vimrc" "dot_bash_aliases" "dot_gitconfig" "dot_selected_editor" "dot_bash_profile")
 
 # Создаем один временный файл для всех элементов списка
 temp_file=$(create_temp_file)

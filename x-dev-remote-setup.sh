@@ -75,6 +75,10 @@ process_remote_file() {
     fi
 }
 
+[ "$GIT_AUTHOR_NAME" = "Yuriy Abramov" ] || cat <<EOL
+sudo sh -c 'echo "AcceptEnv GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL" >> /etc/ssh/sshd_config && sshd -t && service sshd reload'
+EOL
+
 # Список удаленных файлов
 REMOTE_SCRIPT_NAMES=("dot_vimrc" "dot_bash_aliases" "dot_gitconfig" "dot_selected_editor" "dot_bash_profile")
 

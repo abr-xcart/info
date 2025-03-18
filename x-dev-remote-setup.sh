@@ -76,7 +76,7 @@ process_remote_file() {
 }
 
 [ "$GIT_AUTHOR_NAME" = "Yuriy Abramov" ] || cat <<EOL
-sudo sh -c 'echo "AcceptEnv GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL" >> /etc/ssh/sshd_config && sshd -t && service sshd reload'
+sudo sh -c 'echo "AcceptEnv GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL" >> /etc/ssh/sshd_config && sshd -t && service sshd reload'
 EOL
 
 # Список удаленных файлов

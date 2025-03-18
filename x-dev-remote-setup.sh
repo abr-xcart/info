@@ -64,9 +64,6 @@ process_remote_file() {
             new_temp_file="$(create_temp_file)$local_script_name"
             mv "$temp_file" "$new_temp_file"
             echo "vimdiff $new_temp_file ~/$local_script_name"
-        else
-            # Если файлы идентичны, выводим сообщение о совпадении
-            echo "Файл ~/$local_script_name совпадает с удаленным."
         fi
     else
         # Если оригинальный файл не существует, перемещаем временный файл на его место

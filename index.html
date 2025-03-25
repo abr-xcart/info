@@ -30,7 +30,8 @@ set ssl:ca-file "/etc/ssl/certs/ca-certificates.crt"
 export HTTP_PROXY="http://USERNAME:PASSWORD@[your.proxy.server]:[port]"
 export HTTPS_PROXY="https://USERNAME:PASSWORD@[your.proxy.server]:[port]"
 
-#
+docker ps --format "{{.Names}}" | sort
+
 yes | docker image prune -a
 
 # Docker images inspect

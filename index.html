@@ -252,6 +252,16 @@ lvcreate  --type cache -l100%free  -n cache  /dev/ubuntu-vg/db-release /dev/sde 
 <pre>
 btrfs check --clear-space-cache v1 volume
 btrfstune -u volume
+
+# unknown filesystem type 'btrfs'
+grep BTRFS /boot/config-$(uname -r)
+ls /lib/modules/$(uname -r)/kernel/fs/btrfs/
+
+dnf --enablerepo=elrepo-kernel install kernel-ml
+dnf install btrfs-progs kernel-modules-extra
+modprobe btrfs
+lsmod | grep btrfs
+
 </pre>
 
 <h1>fstab</h1>

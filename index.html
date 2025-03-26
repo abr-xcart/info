@@ -26,6 +26,9 @@ set ssl:ca-file "/etc/ssl/certs/ca-certificates.crt"
 
 <h1>Docker</h1>
 <pre>
+# docker host name
+curl -s --unix-socket /var/run/docker.sock http://localhost/info | jq .Name
+
 # cat /etc/sysconfig/docker
 export HTTP_PROXY="http://USERNAME:PASSWORD@[your.proxy.server]:[port]"
 export HTTPS_PROXY="https://USERNAME:PASSWORD@[your.proxy.server]:[port]"

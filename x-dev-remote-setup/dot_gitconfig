@@ -24,3 +24,6 @@
 	ff = only
 [push]
 	default = simple
+[core]
+	editor = vim
+	pager = less -R

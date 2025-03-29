@@ -279,6 +279,14 @@ SELECT temp_files AS "Temporary files", temp_bytes AS "Size of temporary files" 
 <pre>
 xfs_admin -U `uuidgen` /dev/sdf1
 tune2fs -U random /dev/sdb1 
+
+# -c 1 – проверять после каждого монтирования.
+# -C 0 – сбросить счётчик, чтобы проверка запустилась сразу.
+tune2fs -C 0 -c 1 /dev/disk
+sudo journalctl -b | grep fsck
+# /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash fsck.mode=force fsck.repair=yes"
+
 </pre>
 
 <h1>resolvectl</h1>
@@ -287,6 +295,14 @@ sudo resolvectl status
 sudo resolvectl dns tun1 172.28.230.200 172.28.213.223
 sudo resolvectl domain tun1 planeta.ibs planeta.w18 rzd.ibs
 sudo resolvectl flush-caches
+</pre>
+
+<h1>WoL</h1>
+<pre>
+nmcli connection show CONN | grep 802-11-wireless.wake-on-wlan
+nmcli connection modify CONN 802-11-wireless.wake-on-wlan magic
+nmcli connection modify CONN 802-11-wireless.wake-on-wlan-password PASS
+sudo apt install -y wireless-tools
 </pre>
 
 </body>

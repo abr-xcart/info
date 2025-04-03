@@ -90,3 +90,7 @@ for remote_script_name in "${REMOTE_SCRIPT_NAMES[@]}"; do
     # Обрабатываем удаленный файл
     process_remote_file "$temp_file" "$remote_script_name"
 done
+
+grep -H ^X11Forwarding /etc/ssh/sshd_config |grep -v yes$
+#sudo apt install xauth  # Для Debian/Ubuntu
+#sudo yum install xorg-x11-xauth  # Для CentOS/RHEL

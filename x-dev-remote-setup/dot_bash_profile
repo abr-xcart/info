@@ -2,7 +2,7 @@
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
-  . ~/.bashrc
+	. ~/.bashrc
 fi
 
 # User specific environment and startup programs
@@ -12,7 +12,7 @@ PATH=/usr/local/bin:$PATH:$HOME/bin
 export PATH
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+	. ~/.bash_aliases
 fi
 
 source /etc/profile.d/bash_completion.sh

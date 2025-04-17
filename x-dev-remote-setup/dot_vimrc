@@ -1,11 +1,16 @@
+set cursorcolumn
 set cursorline
 set et
+set expandtab
 set foldlevelstart=10
 set hls
 set modeline
 set mouse=
 set noautoindent
 set nobackup
+set nocursorline
+set nonumber
+set nosmartindent
 set nowritebackup
 set paste
 set shiftwidth=2

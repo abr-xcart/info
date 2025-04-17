@@ -15,6 +15,9 @@ if [ -f ~/.bash_aliases ]; then
 	. ~/.bash_aliases
 fi
 
+export EDITOR=vim
+export KUBE_EDITOR=vim
+
 source /etc/profile.d/bash_completion.sh
 source <(kubectl completion bash)
 source <(helm completion bash)

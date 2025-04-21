@@ -177,6 +177,16 @@ sudo grubby --info=ALL | grep -E "kernel.*ml"  # Найти путь к ново
 sudo grubby --set-default /boot/vmlinuz-*ml*   # Установить его по умолчанию
 </pre>
 
+<h1>PSI в RHEL 9.5</h1>
+<pre>
+grep PSI /boot/config-$(uname -r)
+CONFIG_PSI=y
+CONFIG_PSI_DEFAULT_DISABLED=y
+
+sudo grubby --update-kernel=ALL --args="psi=1"
+sudo grubby --info=ALL | grep args
+</pre>
+
 <pre>
 add-apt-repository ppa:yannubuntu/boot-repair
 apt-get update

@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<!--
+vim: paste hls
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -37,6 +40,10 @@ export HTTPS_PROXY="https://USERNAME:PASSWORD@[your.proxy.server]:[port]"
 
 docker ps --format "{{.Names}}" | sort
 
+systemctl edit docker
+systemctl show --property=Environment docker
+systemctl daemon-reload
+systemctl restart docker
 yes | docker image prune -a
 
 # Docker images inspect
@@ -257,7 +264,7 @@ lvconvert -m1 --mirrorlog core --type mirror --stripes 2 /dev/centos/docker /dev
 lvconvert -m0 /dev/centos/docker /dev/sda
 # cache
 lvconvert --uncache /dev/ubuntu-vg/db-release
-lvcreate  --type cache -l100%free  -n cache  /dev/ubuntu-vg/db-release /dev/sde /dev/sdb
+lvcreate --type cache -l100%free -n cache /dev/ubuntu-vg/db-release /dev/sde /dev/sdb
 </pre>
 
 <h1>btrfs</h1>

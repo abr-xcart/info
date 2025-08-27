@@ -124,6 +124,8 @@ git config --global pager.branch false
 git config --global core.editor "vim"
 git config --global core.pager 'less -R'
 
+git config --global push.default upstream
+
 # Git submodule
 git config --list | grep submodule
 git submodule update --init --recursive

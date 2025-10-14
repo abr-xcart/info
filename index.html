@@ -261,7 +261,7 @@ dd if=/dev/mapper/vg_thin01-volA of=/dev/mapper/vg_thin02-volA conv=sparse statu
 
 <h1>lvm</h1>
 <pre>
-lvs --all --segments -o +devices
+lvs --all --segments -o +stripes,devices
 # stripes
 lvconvert -m1 --mirrorlog core --type mirror --stripes 2 /dev/centos/docker /dev/sdc /dev/sdd
 lvconvert -m0 /dev/centos/docker /dev/sda

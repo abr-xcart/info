@@ -150,7 +150,7 @@ export GIT_AUTHOR_EMAIL="YAbramov@ibs.ru"
 EOL
 
 # Setup Server Env Vars for Git
-echo "AcceptEnv GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL" &gt;&gt; /etc/ssh/sshd_config
+echo "AcceptEnv GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL" &gt;&gt; /etc/ssh/sshd_config
 sudo sshd -t &amp;&amp; service sshd reload
 
 </pre>

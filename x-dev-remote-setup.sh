@@ -100,5 +100,17 @@ sudo grep -H ^X11Forwarding /etc/ssh/sshd_config | grep -v yes$
 EOL
 fi
 
-# sudo apt install crudini xauth  # Для Debian/Ubuntu
-# sudo yum install crudini xorg-x11-xauth  # Для CentOS/RHEL
+. /etc/os-release
+if [ "centos" = "$ID" ]; then
+PKG_MANAGER=yum
+fi
+if [ "ubuntu" = "$ID" ]; then
+PKG_MANAGER=apt
+fi
+command -v screen || cat <<EOL
+sudo $PKG_MANAGER install -y screen
+EOL
+
+cat <<EOL
+sudo $PKG_MANAGER install -y screen crudini xauth xorg-x11-xauth
+EOL

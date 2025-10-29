@@ -1,5 +1,5 @@
 set cursorcolumn
-set cursorline
+highlight CursorColumn ctermbg=238
 set et
 set expandtab
 set foldlevelstart=10

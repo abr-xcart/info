@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# vim: et ts=4 sts=4 hls
+
 # Глобальная переменная для базового URL
 X_DEV_URL="https://info.x-dev.us/x-dev-remote-setup"
 
@@ -72,10 +74,6 @@ process_remote_file() {
     fi
 }
 
-[ "$GIT_AUTHOR_NAME" = "Yuriy Abramov" ] || cat <<EOL
-sudo sh -c 'echo "AcceptEnv GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL NEXUS_CRED" >> /etc/ssh/sshd_config && sshd -t && service sshd reload'
-EOL
-
 # Список удаленных файлов
 REMOTE_SCRIPT_NAMES=("dot_vimrc" "dot_bash_aliases" "dot_gitconfig" "dot_selected_editor" "dot_bash_profile")
 
@@ -91,6 +89,16 @@ for remote_script_name in "${REMOTE_SCRIPT_NAMES[@]}"; do
     process_remote_file "$temp_file" "$remote_script_name"
 done
 
-grep -H ^X11Forwarding /etc/ssh/sshd_config |grep -v yes$
-#sudo apt install xauth  # Для Debian/Ubuntu
-#sudo yum install xorg-x11-xauth  # Для CentOS/RHEL
+if [ -r "/etc/ssh/sshd_config" ]; then
+    grep -H ^X11Forwarding /etc/ssh/sshd_config | grep -v yes$
+    grep --quiet GIT_AUTHOR_NAME /etc/ssh/sshd_config || cat <<EOL
+sudo sh -c 'echo "AcceptEnv GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL NEXUS_CRED" >> /etc/ssh/sshd_config && sshd -t && service sshd reload'
+EOL
+else
+    cat <<EOL
+sudo grep -H ^X11Forwarding /etc/ssh/sshd_config | grep -v yes$
+EOL
+fi
+
+# sudo apt install crudini xauth  # Для Debian/Ubuntu
+# sudo yum install crudini xorg-x11-xauth  # Для CentOS/RHEL

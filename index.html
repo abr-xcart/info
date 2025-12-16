@@ -181,6 +181,20 @@ dracut --force --regenerate-all
 vim /etc/default/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 grub-mkconfig -o /boot/grub/grub.cfg
+
+</pre>
+<h1>BLS (BootLoader Specification)</h1>
+<pre>
+rm -f /boot/loader/entries/*
+
+#grub2-editenv - set kernelopts="root=/dev/mapper/cs-root ro rd.lvm.lv=cs/root crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M noswap"
+
+vim /etc/kernel/cmdline
+
+for kernel in $(rpm -q kernel-core --qf "%{version}-%{release}.%{arch}\n"); do
+    sudo kernel-install add ${kernel} /boot/vmlinuz-${kernel}
+done
+grep swap /boot/loader/entries/*
 </pre>
 
 <h1>PSI в RHEL 9.5</h1>
@@ -332,6 +346,13 @@ nmcli connection show CONN | grep 802-11-wireless.wake-on-wlan
 nmcli connection modify CONN 802-11-wireless.wake-on-wlan magic
 nmcli connection modify CONN 802-11-wireless.wake-on-wlan-password PASS
 sudo apt install -y wireless-tools
+</pre>
+
+<h1>kind</h1>
+<pre>
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.25.0/kind-linux-amd64
+kind get clusters
+
 </pre>
 
 </body>

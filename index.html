@@ -177,11 +177,22 @@ service iptables-persistent save
 
 <h1>grub</h1>
 <pre>
+dnf install shim-x64 grub2-efi-x64 grub2-efi-x64-modules efibootmgr
+grub2-install --target=x86_64-efi --efi-directory=/boot/efi
+
+grub2-install --target=i386-pc /dev/sdb
+
 dracut --force --regenerate-all
+/etc/grub.d/01_enable_lvm
+#!/bin/sh
+cat &lt;&lt; EOF
+insmod lvm
+EOF
+dracut --force --add lvm --regenerate-all
+
 vim /etc/default/grub
 grub2-mkconfig -o /boot/grub2/grub.cfg
 grub-mkconfig -o /boot/grub/grub.cfg
-
 </pre>
 <h1>BLS (BootLoader Specification)</h1>
 <pre>
@@ -190,11 +201,46 @@ rm -f /boot/loader/entries/*
 #grub2-editenv - set kernelopts="root=/dev/mapper/cs-root ro rd.lvm.lv=cs/root crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M noswap"
 
 vim /etc/kernel/cmdline
+sudo kernel-install add $(uname -r) /boot/$(cat /etc/machine-id)/$(uname -r)/linux
 
 for kernel in $(rpm -q kernel-core --qf "%{version}-%{release}.%{arch}\n"); do
     sudo kernel-install add ${kernel} /boot/vmlinuz-${kernel}
 done
+
+for kernel in $(rpm -q kernel-ml-core --qf "%{version}-%{release}.%{arch}\n"); do
+     kernel-install add ${kernel} /boot/vmlinuz-${kernel}
+done
+
+
 grep swap /boot/loader/entries/*
+
+grub2-editenv list
+
+</pre>
+
+<h1>btrfs</h1>
+<pre>
+btrfs check --clear-space-cache v1 volume
+btrfstune -u volume
+
+# unknown filesystem type 'btrfs'
+grep BTRFS /boot/config-$(uname -r)
+ls /lib/modules/$(uname -r)/kernel/fs/btrfs/
+
+sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+sudo dnf install -y https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm
+sudo dnf install -y https://www.elrepo.org/elrepo-release-9.el9.elrepo.noarch.rpm
+sudo dnf --enablerepo=elrepo-kernel install -y kernel-ml
+sudo grubby --info=ALL | grep -E "kernel.*ml"  # Найти путь к новому ядру
+sudo grubby --set-default /boot/vmlinuz-*ml*   # Установить его по умолчанию
+
+rpm -qa kernel-ml* --qf "%{name}\n"
+
+dnf --enablerepo=elrepo-kernel install kernel-ml
+dnf install btrfs-progs kernel-modules-extra
+modprobe btrfs
+lsmod | grep btrfs
+
 </pre>
 
 <h1>PSI в RHEL 9.5</h1>
@@ -206,7 +252,7 @@ CONFIG_PSI_DEFAULT_DISABLED=y
 sudo grubby --update-kernel=ALL --args="psi=1"
 sudo grubby --info=ALL | grep args
 </pre>
-
+<h1>boot-repair</h1>
 <pre>
 add-apt-repository ppa:yannubuntu/boot-repair
 apt-get update
@@ -284,28 +330,6 @@ lvconvert --uncache /dev/ubuntu-vg/db-release
 lvcreate --type cache -l100%free -n cache /dev/ubuntu-vg/db-release /dev/sde /dev/sdb
 </pre>
 
-<h1>btrfs</h1>
-<pre>
-btrfs check --clear-space-cache v1 volume
-btrfstune -u volume
-
-# unknown filesystem type 'btrfs'
-grep BTRFS /boot/config-$(uname -r)
-ls /lib/modules/$(uname -r)/kernel/fs/btrfs/
-
-sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
-sudo dnf install -y https://www.elrepo.org/elrepo-release-8.el8.elrepo.noarch.rpm
-sudo dnf install -y https://www.elrepo.org/elrepo-release-9.el9.elrepo.noarch.rpm
-sudo dnf --enablerepo=elrepo-kernel install -y kernel-ml
-sudo grubby --info=ALL | grep -E "kernel.*ml"  # Найти путь к новому ядру
-sudo grubby --set-default /boot/vmlinuz-*ml*   # Установить его по умолчанию
-
-dnf --enablerepo=elrepo-kernel install kernel-ml
-dnf install btrfs-progs kernel-modules-extra
-modprobe btrfs
-lsmod | grep btrfs
-
-</pre>
 
 <h1>fstab</h1>
 <pre>

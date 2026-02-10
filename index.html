@@ -125,6 +125,8 @@ git config --global core.editor "vim"
 git config --global core.pager 'less -R'
 
 git config --global push.default upstream
+git config --global push.autoSetupRemote true
+
 # git branch --set-upstream-to=origin/master origin-master
 
 # Git submodule
@@ -151,6 +153,8 @@ EOL
 
 # Setup Server Env Vars for Git
 echo "AcceptEnv GIT_AUTHOR_NAME GIT_AUTHOR_EMAIL GIT_COMMITTER_NAME GIT_COMMITTER_EMAIL" &gt;&gt; /etc/ssh/sshd_config
+echo "X11UseLocalhost no" &gt;&gt; /etc/ssh/sshd_config
+echo "AcceptEnv NEXUS_CRED" &gt;&gt; /etc/ssh/sshd_config
 sudo sshd -t &amp;&amp; systemctl restart sshd
 
 </pre>

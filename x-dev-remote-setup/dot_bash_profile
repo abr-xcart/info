@@ -16,12 +16,15 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 export EDITOR=vim
-export KUBE_EDITOR=vim
-
 source /etc/profile.d/bash_completion.sh
-source <(kubectl completion bash)
-source <(helm completion bash)
 
 [ "$GIT_AUTHOR_NAME" = "Yuriy Abramov" ] && /usr/bin/screen -S pull-bin -d -m bash -c "( cd /opt/planeta/bin && git diff-index HEAD -- && git pull ) || sleep infinity"
+
+#
+# k8s
+#
+export KUBE_EDITOR=vim
+source <(kubectl completion bash)
+source <(helm completion bash)
 
 [ -e /opt/planeta/bin/cluster-stuff.sh ] && /opt/planeta/bin/cluster-stuff.sh

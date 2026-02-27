@@ -114,3 +114,6 @@ EOL
 cat <<EOL
 sudo $PKG_MANAGER install -y screen crudini xauth xorg-x11-xauth
 EOL
+
+mkdir -p ~/.vim/colors
+wget --no-verbose https://raw.githubusercontent.com/chriskempson/vim-tomorrow-theme/master/colors/Tomorrow-Night.vim -O ~/.vim/colors/Tomorrow-Night.vim

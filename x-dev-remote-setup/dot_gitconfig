@@ -1,9 +1,11 @@
+# vim: hls
 [color]
 	ui = true
 	status = always
 	diff = always
 [diff]
 	tool = vimdiff
+	submodule = diff
 [difftool]
 	prompt = false
 [difftool "vimdiff"]
